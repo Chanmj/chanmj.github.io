@@ -1,0 +1,1183 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微信小程序 微信小程序开发 微信小程序总结" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Carson Chen" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="微信小程序的价值&amp;emsp;&amp;emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。">
+<meta name="keywords" content="微信小程序 微信小程序开发 微信小程序总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序开发总结">
+<meta property="og:url" content="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/index.html">
+<meta property="og:site_name" content="Carson Chen">
+<meta property="og:description" content="微信小程序的价值&amp;emsp;&amp;emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/wechat.jpg">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/lifecycle01.png">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/lifecycle02.png">
+<meta property="og:updated_time" content="2017-03-24T01:54:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序开发总结">
+<meta name="twitter:description" content="微信小程序的价值&amp;emsp;&amp;emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。">
+<meta name="twitter:image" content="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/wechat.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 微信小程序开发总结 | Carson Chen  - 个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Carson Chen</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle" id="site-subtitle">Carson's Notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button onclick="showSubtitle()">
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav" id="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar-check-o"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微信小程序开发总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-24T09:54:21+08:00" content="2017-03-24">
+              2017-03-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">微信小程序</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          <!-- 
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/24/微信小程序开发总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/24/微信小程序开发总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+           -->
+
+          
+
+          
+          
+             <span id="/2017/03/24/微信小程序开发总结/" class="leancloud_visitors" data-flag-title="微信小程序开发总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">热度 </span>
+               <span class="leancloud-visitors-count"></span>
+               <span>℃</span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2017/03/24/微信小程序开发总结/wechat.jpg" alt=""></p>
+<h1 id="微信小程序的价值"><a href="#微信小程序的价值" class="headerlink" title="微信小程序的价值"></a>微信小程序的价值</h1><p>&emsp;&emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。<br><a id="more"></a></p>
+<ol>
+<li><p><strong>小程序是改善移动端用户体验的一次机会</strong></p>
+<p> 现在用户在移动端的浏览器打开比如滴滴打车这些 Web App，大概需要 3-5 秒的时间才能够看到 Web App 的界面。技术层面是因为 WebView 的加载过程，需要从服务器端拉取数据，会有一定的白屏等待时间。<br><br> <strong>而基于微信小程序所提供的本地数据缓存接口，开发者者可以预先把小程序里会用到的图片和资源文件缓存在微信端，当用户在微信打开小程序的时候，就可以实现“秒开”。</strong>当然目前小程序的文件大小有不超过过1M的限制,所以开发者们也需要好好考虑如何把自己的小程序实现成一个小而美的产品。</p>
+</li>
+<li><p><strong>小程序不能做什么？不适合做什么？</strong></p>
+<p> 目前“小程序”的接口，暂时不支持直播。运营规则层面不允许开发游戏、小测试类的小程序。小程序也不太适合做单纯展示型的应用，展示类的场景订阅号已经支持的不错了，从另一个技术层面我们也能看到一些线索，小程序并不是用来给开发者做单纯展示类的应用。</p>
+</li>
+<li><p><strong>小程序适合做什么？</strong></p>
+<p> <strong>小程序比较适合做一些“用完即走”的功能和场景，比如当某些轻度用户想到用某个功能又不愿意安装 APP 的时候，小程序就能帮你留住这 20% 的轻度用户。</strong></p>
+</li>
+<li><p><strong>更多接口，意味着更多可能性</strong></p>
+<p> 从移动开发技术栈层面来看，小程序以 JSSDK 方式开放的一些系统级接口，比 H5 和 React-Native 更多。比如一些网络设备状况、重力感应、社交、支付等接口。</p>
+<p> 这也意味开发者用腾讯云和小程序给到的能力，让小程序的开发变得更加简单，给用户提供一些更小而美的应用、实现“用完即走”的使用场景。</p>
+</li>
+</ol>
+<p>&emsp;&emsp;微信小程序出来，程序员的圈子里不少前端程序员都很兴奋，认为前端的春天来了。<strong>小程序最吸引前端，但小程序开发不是 H5 开发</strong></p>
+<ul>
+<li>H5 是基于 DOM（文档对象模型）的，但小程序不是</li>
+<li>基于包开发，开发和发布流程是不一样的</li>
+<li>小程序上传和下载文件的时候，只能拿到 ID，不能拿到内容</li>
+<li>Web 开发的 session 管理，服务器帮你实现了，不需要你关注</li>
+<li>小程序虽然有域名（用于通讯和验证），但是没有 Cookie</li>
+</ul>
+<h1 id="思维转变"><a href="#思维转变" class="headerlink" title="思维转变"></a>思维转变</h1><ul>
+<li>微信小程序没有 HTML 的常用标签，而是类似 React 的微信自定义组件，比如 view、text、map 等</li>
+<li>没有 window 变量，但微信提供了 wx 全局方法集</li>
+<li>没有 a 标签链接，不可嵌套 iframe</li>
+<li>事件绑定和条件渲染类似 Angular，全部写在 WXML 中</li>
+<li>数据绑定采用 Mustache 双大括号语法</li>
+<li>无法操作 DOM，通过改变 page data（类似 React 的 state）来改变视图展现</li>
+</ul>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p><br><strong>可以把小程序理解成一个单页面的 H5 网页，所有元素的加载都是一次性的，这也就引来了生命周期的概念：</strong></p>
+<p><img src="/2017/03/24/微信小程序开发总结/lifecycle01.png" alt=""><br>首次打开，小程序初始化</p>
+<ul>
+<li>小程序初始化完成后，触发<code>onShow</code>事件</li>
+<li>小程序被切换到后台（熄屏，切换 APP 等），触发<code>onHide</code></li>
+<li>小程序从后台切换到前台，再次触发<code>onShow</code></li>
+<li>小程序出错，触发<code>onError</code></li>
+</ul>
+<p><strong>每个页面也有自己的生命周期：</strong></p>
+<p><img src="/2017/03/24/微信小程序开发总结/lifecycle02.png" alt=""></p>
+<blockquote>
+<p>注意：在微信6.5.3版本中，部分Android机触发不了onLoad事件，可以用onReady替代。</p>
+</blockquote>
+<h1 id="数据中心"><a href="#数据中心" class="headerlink" title="数据中心"></a>数据中心</h1><p><strong>根目录的app.js很有用，根目录的app.js很有用，根目录的app.js很有用</strong></p>
+<p>因为在它内部注册的变量或方法，都是可以被所有页面获取到，所以利用它也可以处理上面所述的跨页面事件触发问题。而且可以注册<code>globalData</code>供所有页面取用，例如可以把<code>systemInfo</code>直接注册到<code>globalData</code>中，这样就不用在每个页面都获取一遍：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const systemInfo = wx.getSystemInfoSync()</div><div class="line">App(&#123;</div><div class="line">  globalData: &#123;</div><div class="line">    systemInfo</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>在页面中获取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Page A</div><div class="line"></div><div class="line">const &#123;</div><div class="line">  systemInfo</div><div class="line">&#125; = getApp().globalData</div></pre></td></tr></table></figure></p>
+<h1 id="参数传值"><a href="#参数传值" class="headerlink" title="参数传值"></a>参数传值</h1><h2 id="data-id"><a href="#data-id" class="headerlink" title="data-id"></a>data-id</h2><p>我们可以给 HTML 元素添加<code>data-*</code>属性来传递我们需要的值,使用方法说明：</p>
+<ol>
+<li><p>设置 data-id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;view class=&quot;block&quot; bindtap=&quot;playTap&quot; data-id=&quot;&#123;&#123;modle.id&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值 + 传值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">playTap:function(e) &#123;</div><div class="line">       const dataset = e.currentTarget.dataset;</div><div class="line">       wx.navigateTo(&#123;</div><div class="line">         url: &apos;../play/index?id=&apos;+ dataset.id</div><div class="line">       &#125;)</div><div class="line">       console.log(dataset.id);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">onLoad:function (param) &#123;</div><div class="line">    //页面初始化</div><div class="line">        this.setData(&#123;</div><div class="line">            currentId:param.id</div><div class="line">        &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p><code>data-</code> 注意事项：<code>data-</code> 名称不能有大写字母, <code>data-*</code> 属性中不可以存放对象</p>
+</blockquote>
+<h2 id="设置-id-的方法标识来传值"><a href="#设置-id-的方法标识来传值" class="headerlink" title="设置 id 的方法标识来传值"></a>设置 id 的方法标识来传值</h2><p>使用方法说明:</p>
+<ol>
+<li><p>设置 id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;view bindtap=“playTap&quot; id=&quot;&#123;&#123;modle.id&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值</p>
+<blockquote>
+<p>通过<code>e.currentTarget.id</code>获取设置的<code>id</code>的值,然后通过设置全局对象的方式来传递数值</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="在navigator中添加参数传值"><a href="#在navigator中添加参数传值" class="headerlink" title="在navigator中添加参数传值"></a>在navigator中添加参数传值</h2><p>使用方法说明：</p>
+<ol>
+<li><p>传值:在<code>navigator</code>的属性<code>url</code>后拼接<code>?id</code>(参数名字)=要传递的值 (如果多个参数用<code>&amp;</code>分开 <code>&amp;name=value&amp;...</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;navigator url=&quot;../my/my?id=&#123;&#123;item.id&#125;&#125;&quot; wx:for=&quot;&#123;&#123;modles&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">onLoad (params)&#123;</div><div class="line">    app.fetch(API.detail + params.id,(err,data) =&gt; &#123; &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="数据请求封装"><a href="#数据请求封装" class="headerlink" title="数据请求封装"></a>数据请求封装</h1><ol>
+<li><p>将所有的接口放在统一的 js 文件中并导出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const api = &#123;</div><div class="line">    interface1: &apos;https://...&apos;,</div><div class="line">    interface2: &apos;https://...&apos;,</div><div class="line">    interface3: &apos;https://...&apos;,</div><div class="line">    .....</div><div class="line">&#125;</div><div class="line">module.exports = api;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在 app.js 中创建封装请求数据的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">fetch(url, data, callback) &#123;</div><div class="line">      wx.request(&#123;</div><div class="line">          url,</div><div class="line">          data: data,</div><div class="line">          header: &#123;</div><div class="line">              &apos;Content-Type&apos;: &apos;application/json&apos;</div><div class="line">          &#125;,</div><div class="line">          success(res) &#123;</div><div class="line">              callback(null, res.data);</div><div class="line">          &#125;,</div><div class="line">          error(err) &#123;</div><div class="line">              callback(err);</div><div class="line">          &#125;</div><div class="line">      &#125;)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在子页面中调用封装的方法请求数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import API from &quot;../../api/api.js&quot;;</div><div class="line">const app = getApp();</div><div class="line">const conf = &#123;</div><div class="line">    data:&#123;</div><div class="line">        title:&apos;正在拼命加载中...&apos;,</div><div class="line">        loadding:true</div><div class="line">    &#125;,</div><div class="line">    onLoad ()&#123;</div><div class="line">        app.fetch(API.interface1,&#123;&#125;,(err,data) =&gt; &#123;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="使用模板（模板真滴是个好东西）"><a href="#使用模板（模板真滴是个好东西）" class="headerlink" title="使用模板（模板真滴是个好东西）"></a>使用模板（模板真滴是个好东西）</h1><ol>
+<li><p>定义模板: <code>name</code>设置模板的名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 定义模板</div><div class="line">&lt;template name=&quot;homecell&quot;&gt;</div><div class="line">     &lt;view class=&quot;item&quot;&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line"> &lt;/template&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用模板首先引入模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;import src=&quot;../../commonXml/homecell.wxml&quot; /&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后使用模板<code>is</code>后写模板的<code>name</code>. 通过<code>data</code>来传递需要是数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;template is=&quot;homecell&quot; data=&quot;&#123;&#123;item&#125;&#125;&quot;&gt;&lt;/template&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Array-比较好用的属性和方法"><a href="#Array-比较好用的属性和方法" class="headerlink" title="Array 比较好用的属性和方法"></a>Array 比较好用的属性和方法</h1><ul>
+<li><code>Array.isArray()</code> 方法用来判断某个值是否为 <code>Array</code> 。如果是，则返回 <code>true</code>，否则返回 <code>false</code>。</li>
+<li><code>concat()</code> 方法将传入的数组或非数组值与原数组合并,组成一个新的数组并返回。</li>
+<li><code>forEach()</code> 方法对数组的每个元素执行一次提供的函数(回调函数)。</li>
+<li><code>join()</code> 方法将数组中的所有元素连接成一个字符串。</li>
+<li><code>keys()</code> 方法返回一个数组索引的迭代器。</li>
+<li><code>map()</code> 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组</li>
+<li><code>pop()</code> 方法删除一个数组中的最后的一个元素，并且返回这个元素。</li>
+<li><code>push()</code> 方法添加一个或多个元素到数组的末尾，并返回数组新的长度（<code>length</code> 属性值）。</li>
+<li><code>toString()</code> 返回一个字符串，表示指定的数组及其元素。</li>
+</ul>
+<h1 id="对象Object常用方法"><a href="#对象Object常用方法" class="headerlink" title="对象Object常用方法"></a>对象Object常用方法</h1><ol>
+<li><p>初始化方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj = [];</div><div class="line">var obj = new obj();</div><div class="line">var obj = Object.create(null);</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加元素的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dic[“key”] = “value”;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除<code>key</code>的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete dic[“key”];</div></pre></td></tr></table></figure>
+</li>
+<li><p>清空词所有条目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dic.clear();</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete dic;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有属性的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object.keys(obj);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>对象的所有键名都是字符串，所以加不加引号都可以,如果键名是数值，会被自动转为字符串但是，如果键名不符合标识名的条件（比如第一个字符为数字，或者含有空格或运算符），也不是数字，则必须加上引号，否则会报错</p>
+</blockquote>
+<ol>
+<li>读取属性<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj.name || obj[’name&apos;]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注意: 数值键名不能使用点运算符（因为会被当成小数点），只能使用方括号运算符。</p>
+</blockquote>
+<ol>
+<li><p>检查变量是否声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if(obj.name) || if(obj[’name&apos;])</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>in</code> 运算符用于检查对象是否包含某个属性,如果包含返回<code>true</code>, 否则返回<code>false</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if ( ‘x’ in obj) &#123;return 1&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>for … in</code> 循环用来遍历一个对象的全部属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for(var i in obj) &#123;</div><div class="line">    console.log(obj);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>with</code> 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">with(obj) &#123;</div><div class="line">    name1 = 1;</div><div class="line">    name2 = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 等同于</div><div class="line">obj.name1 = 1;</div><div class="line">obj.name2 = 2;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>作用: 操作同一个对象的多个属性时,提供一些书写的方便</p>
+</blockquote>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.zhihu.com/question/50875544/answer/133070413" target="_blank" rel="external">知乎：贺嘉</a></li>
+<li><a href="https://segmentfault.com/a/1190000008056208" target="_blank" rel="external">segmentFault：binnng</a></li>
+<li><a href="http://www.wxapp-union.com/forum.php?mod=viewthread&amp;tid=2045&amp;extra=page=1" target="_blank" rel="external">微信小程序联盟：ntt123456</a></li>
+</ul>
+
+      
+    </div>
+
+	<div>
+      
+        
+<blockquote class="blockquote-center">完<blockquote>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post_copyright" style="clear:both;">
+           <p><span>本文标题: </span><a href="/2017/03/24/微信小程序开发总结/">微信小程序开发总结</a></p>
+           <p><span>文章作者: </span><a href="/" title="访问 陈明佳 的个人博客">陈明佳</a></p>
+           <p><span>发布时间: </span>2017年3月24日 - 09时03分</p>
+           <p><span>最后更新: </span>2017年3月24日 - 09时03分</p>
+           <p><span>原始链接: </span><a href="/2017/03/24/微信小程序开发总结/" title="微信小程序开发总结">http://www.carsonchen.online/2017/03/24/微信小程序开发总结/</a></p>
+           <p><span>许可协议: </span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial 4.0</a>转载请保留原文链接及作者。</p>
+        </div>
+      
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信小程序/" rel="tag">#微信小程序</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/25/前端技术选型/" class="post-nav-title-link" rel="prev" title="前端技术选型">
+                <i class="fa fa-chevron-left"></i> 前端技术选型
+              </a>
+            
+          </div>
+
+		  <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/22/ES6中常用特性/" class="post-nav-title-link" rel="next" title="ES6中常用特性">
+                ES6中常用特性  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/24/微信小程序开发总结/"
+           data-title="微信小程序开发总结" data-url="http://www.carsonchen.online/2017/03/24/微信小程序开发总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.jpg"
+               alt="陈明佳" />
+          <p class="site-author-name" itemprop="name">陈明佳</p>
+          <p class="site-description motion-element" itemprop="description">念念不忘 必有回响</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" target="_blank" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarsonChenzzz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5485910731" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              友情链接
+            </div>
+
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://www.wuxubj.cn" title="务虚笔记" target="_blank">务虚笔记</a>
+                </span>
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://notes.iissnan.com" title="iissnan" target="_blank">iissnan</a>
+                </span>
+              
+
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#微信小程序的价值"><span class="nav-number">1.</span> <span class="nav-text">微信小程序的价值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思维转变"><span class="nav-number">2.</span> <span class="nav-text">思维转变</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生命周期"><span class="nav-number">3.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据中心"><span class="nav-number">4.</span> <span class="nav-text">数据中心</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数传值"><span class="nav-number">5.</span> <span class="nav-text">参数传值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-id"><span class="nav-number">5.1.</span> <span class="nav-text">data-id</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-id-的方法标识来传值"><span class="nav-number">5.2.</span> <span class="nav-text">设置 id 的方法标识来传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在navigator中添加参数传值"><span class="nav-number">5.3.</span> <span class="nav-text">在navigator中添加参数传值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据请求封装"><span class="nav-number">6.</span> <span class="nav-text">数据请求封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用模板（模板真滴是个好东西）"><span class="nav-number">7.</span> <span class="nav-text">使用模板（模板真滴是个好东西）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array-比较好用的属性和方法"><span class="nav-number">8.</span> <span class="nav-text">Array 比较好用的属性和方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象Object常用方法"><span class="nav-number">9.</span> <span class="nav-text">对象Object常用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">10.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <div id="bottomheart" style="cursor:pointer;"><i class="fa fa-heart"></i></div>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈明佳</span><br/>
+  
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261488625'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261488625%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+  
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i> 访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i> 总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"carsonchen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PDil5it91EzSmFEkaC3W26H4-gzGzoHsz", "EOc1OIh0MkNJrEdIyFcmIv2C");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+  <script type="text/JavaScript">
+function hideElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="none";
+}
+
+function showElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="block";
+}
+</script>
+
+<script type="text/JavaScript">
+function showSubtitle()
+{
+  var siteNav=document.getElementById("site-nav");
+  if(siteNav.style.display=="block")
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="none";
+  }else
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="block";
+  }
+
+}
+</script>
+
+  <!-- 小心心动画 -->
+  <script type="text/javascript" src="/js/src/hexo-next-bottomheart.js"></script>
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+
+</body>
+</html>

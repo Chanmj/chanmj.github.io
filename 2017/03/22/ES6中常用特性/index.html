@@ -1,0 +1,1139 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript ES6 特性 常用特性" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Carson Chen" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ECMAScript 6&amp;emsp;&amp;emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。">
+<meta name="keywords" content="JavaScript ES6 特性 常用特性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6中常用特性">
+<meta property="og:url" content="http://www.carsonchen.online/2017/03/22/ES6中常用特性/index.html">
+<meta property="og:site_name" content="Carson Chen">
+<meta property="og:description" content="ECMAScript 6&amp;emsp;&amp;emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/22/ES6中常用特性/es6.jpg">
+<meta property="og:updated_time" content="2017-03-24T07:27:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6中常用特性">
+<meta name="twitter:description" content="ECMAScript 6&amp;emsp;&amp;emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。">
+<meta name="twitter:image" content="http://www.carsonchen.online/2017/03/22/ES6中常用特性/es6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ES6中常用特性 | Carson Chen  - 个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Carson Chen</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle" id="site-subtitle">Carson's Notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button onclick="showSubtitle()">
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav" id="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar-check-o"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ES6中常用特性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-22T14:53:34+08:00" content="2017-03-22">
+              2017-03-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          <!-- 
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/22/ES6中常用特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/ES6中常用特性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+           -->
+
+          
+
+          
+          
+             <span id="/2017/03/22/ES6中常用特性/" class="leancloud_visitors" data-flag-title="ES6中常用特性">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">热度 </span>
+               <span class="leancloud-visitors-count"></span>
+               <span>℃</span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2017/03/22/ES6中常用特性/es6.jpg" alt=""></p>
+<h1 id="ECMAScript-6"><a href="#ECMAScript-6" class="headerlink" title="ECMAScript 6"></a>ECMAScript 6</h1><p>&emsp;&emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。<br><a id="more"></a></p>
+<h2 id="什么是-ECMAScrpit"><a href="#什么是-ECMAScrpit" class="headerlink" title="什么是 ECMAScrpit"></a>什么是 ECMAScrpit</h2><p>&emsp;&emsp;JavaScript 的语言标准是由 ECMA (类似 W3C 的标准化组织)制定，并命名为 ECMAscript，除其他事项外，ECMAscript 还定义了：</p>
+<ul>
+<li>语法规则 - 解析规则、关键字、声明、操作符等</li>
+<li>变量类型 - 布尔型、字符串、对象、数字等</li>
+<li>原型和继承机制</li>
+<li>包含内置对象和方法的标准库 - JSON、Math、数组方法、遍历方法等</li>
+</ul>
+<p>&emsp;&emsp;ECMAScript 标准不定义 HTML 或 CSS 的相关功能，也不定义类似 DOM（文档对象模型）的 Web API，这些都在独立的标准中进行定义。ECMAScript 涵盖了各种环境中 JS 的使用场景，无论是浏览器环境还是类似 NodeJS 的非浏览器环境。</p>
+<h2 id="JavaScript的历史"><a href="#JavaScript的历史" class="headerlink" title="JavaScript的历史"></a>JavaScript的历史</h2><p>JavaScript 发展时间轴：</p>
+<ol>
+<li>1995：JavaScript 诞生，它的初始名叫 LiveScript</li>
+<li>1997：ECMAScript 标准确立</li>
+<li>1999：ES3 出现，与此同时 IE5 风靡一时</li>
+<li>2000–2005：XMLHttpRequest 又名 AJAX，在 Outlook Web Access (2000)、Oddpost (2002)，Gmail (2004)和 Google Maps (2005)大受重用</li>
+<li>2009：ES5 出现，例如 forEach，Object.keys，Object.create 和 JSON 标准</li>
+<li>2015：ES6/ECMAScript2015 出现</li>
+</ol>
+<hr>
+<h1 id="ES6-常用特性"><a href="#ES6-常用特性" class="headerlink" title="ES6 常用特性"></a>ES6 常用特性</h1><p>所提到的常用特性十分主观并且带有偏见，其他未提到的特性并不是因为没有作用，而是我了解的不多</p>
+<h2 id="块级作用域及-let-const-命令"><a href="#块级作用域及-let-const-命令" class="headerlink" title="块级作用域及 let/const 命令"></a>块级作用域及 let/const 命令</h2><p>&emsp;&emsp;在 ES6 中，声明变量不再用<code>var</code>而用<code>let</code>/<code>const</code>。<code>var</code>的问题在于它会泄露变量到其他代码块中，而<code>let</code>可以让你把变量作用域限制在当前块里。我们用<code>{}</code>来定义块，但是在 ES5 中这些花括号起不到任何作用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  let n = 1;</div><div class="line">  if (true) &#123;</div><div class="line">    let n = 2;</div><div class="line">  &#125;</div><div class="line">  console.log(n); // 2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>const</code>声明一个只读的常量。一旦声明，常量的值就不能改变。同样<code>const</code>的作用域与<code>let</code>命令相同，只在声明所在的块级作用域内有效，<code>const</code>命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">  const A = 3;</div><div class="line">  A = 4; // 报错</div><div class="line">&#125;</div><div class="line">console.log(A) // A is not defined</div></pre></td></tr></table></figure></p>
+<p><code>const</code>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，<code>const</code>只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const acers = [];</div><div class="line">acers.push(&apos;Carson&apos;); // 可执行</div><div class="line">acers = [&apos;Chen&apos;];    // 报错</div></pre></td></tr></table></figure></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p><code>=&gt;</code>不只是关键字<code>function</code>的简写，它还带来了其它好处。以前我们使用闭包，<code>this</code>总是预期之外地产生改变，而箭头函数的迷人之处在于，现在你的<code>this</code>可以按照你的预期使用了，身处箭头函数里面，<code>this</code>还是原来的<code>this</code>。有经验的 JavaScript 开发者都熟悉诸如<code>var _this = this</code>;或<code>var that = this</code>这种引用外围<code>this</code>的模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var _this = this;</div><div class="line">$(&apos;.btn&apos;).click(function(event)&#123;</div><div class="line">  _this.sendData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>但在 ES6 中借助<code>=&gt;</code>，就不需要这种模式了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;.btn&apos;).click((event) =&gt;&#123;</div><div class="line">  this.sendData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这是 ES5 中利用 messages 数组创建一个数组的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map(function (value) &#123;</div><div class="line">  return &apos;ID is &apos; + value // 显式返回</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>在ES6中会变成这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map(value =&gt; `ID is $&#123;value&#125;`) // 隐式返回</div></pre></td></tr></table></figure></p>
+<p>请注意，这里用了字符串模板。<br><br>在箭头函数中，对于单个参数，括号<code>()</code>是可选的，但当你超过一个参数的时候你就需要他们。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map((value, index) =&gt; `ID of $&#123;index&#125; element is $&#123;value&#125; `) // 隐式返回</div></pre></td></tr></table></figure></p>
+<h2 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h2><p>以前我们经常要检查一个变量是否已定义，没定义就赋一个默认值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var handsome = function(name, tall, age)&#123;</div><div class="line">    var name = name || &apos;Carson&apos;;</div><div class="line">    var tall = tall || 178;</div><div class="line">    var age = age || 3;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样做一直都没什么问题，直到参数的值为<code>0</code>，因为<code>0</code>在 JavaScript 中算是<code>false</code>值，它会直接变成后面硬编码的值而不是<code>0</code>本身。当然了，谁要用<code>0</code>来传值啊（讽刺脸）？在 ES6 中，我们可以把这些默认值直接放在函数签名中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var handsome = function(name = &apos;Carson&apos;, tall = 178, age = 3)&#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="模板表达式"><a href="#模板表达式" class="headerlink" title="模板表达式"></a>模板表达式</h2><p>模版表达式在其他语言中一般是为了在模版字符串中输出变量，所以在 ES5 中，我们非得把字符串破开变成这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var handsome = &apos;My name is &apos; + name + &apos;, my height is&apos; + tall + &apos;cm.&apos;;</div><div class="line">var url = &apos;http://carsonchen.online/2017/&apos; + id;</div></pre></td></tr></table></figure></p>
+<p>幸运的是，在 ES6 中我们有了新语法，在反引号包裹的字符串中，使用<code>${NAME}</code>语法来表示模板字符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var handsome = `My name is $&#123;name&#125;, my height is $&#123;tall&#125; cm.`;</div><div class="line">var url = `http://carsonchen.online/2017/$&#123;id&#125;`;</div></pre></td></tr></table></figure></p>
+<h2 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h2><p>ES6 的多行字符串是一个非常实用的功能。在 ES5 中，我们不得不使用以下方法来表示多行字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var BBKing = &apos;念念不忘，\n&apos;</div><div class="line">            +&apos;必有回响。&apos;;</div></pre></td></tr></table></figure></p>
+<p>但是在 ES6 中，只要充分利用反引号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var BBKing = `念念不忘，</div><div class="line">            必有回响。`;</div></pre></td></tr></table></figure></p>
+<h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</p>
+<p>以前，为变量赋值，只能直接指定值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let a = 1;</div><div class="line">let b = 2;</div><div class="line">let c = 3;</div></pre></td></tr></table></figure></p>
+<p>ES6允许写成下面这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let [a, b, c] = [1, 2, 3];</div></pre></td></tr></table></figure></p>
+<p>上面代码表示，可以从数组中提取值，按照对应位置，对变量赋值。</p>
+<p>本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。下面是一些使用嵌套数组进行解构的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">let [a, [[b], c]] = [1, [[2], 3]];</div><div class="line">a // 1</div><div class="line">b // 2</div><div class="line">c // 3</div><div class="line"></div><div class="line">let [ , , third] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];</div><div class="line">third // &quot;c&quot;</div><div class="line"></div><div class="line">let [x, , y] = [1, 2, 3];</div><div class="line">x // 1</div><div class="line">y // 3</div><div class="line"></div><div class="line">let [head, ...tail] = [1, 2, 3, 4];</div><div class="line">head // 1</div><div class="line">tail // [2, 3, 4]</div><div class="line"></div><div class="line">let [a, b, c = &apos;y&apos;,...d] = [&apos;x&apos;];</div><div class="line">a // &quot;x&quot;</div><div class="line">b // undefined</div><div class="line">c // &quot;y&quot; 指定默认值</div><div class="line">d // []</div></pre></td></tr></table></figure></p>
+<p>如果解构不成功，变量的值就等于<code>undefined</code>。</p>
+<p>另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let [x, y] = [1, 2, 3];</div><div class="line">x // 1</div><div class="line">y // 2</div><div class="line"></div><div class="line">let [a, [b], d] = [1, [2, 3], 4];</div><div class="line">a // 1</div><div class="line">b // 2</div><div class="line">d // 4</div></pre></td></tr></table></figure></p>
+<p>上面两个例子，都属于不完全解构，但是可以成功。</p>
+<p>如果等号的右边不是数组，那么将会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 报错</div><div class="line">let [foo] = 1;</div><div class="line">let [foo] = false;</div><div class="line">let [foo] = NaN;</div><div class="line">let [foo] = undefined;</div><div class="line">let [foo] = null;</div><div class="line">let [foo] = &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>解构不仅可以用于数组，还可以用于对象。</li>
+<li>字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。</li>
+<li>解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。</li>
+<li>解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于<code>undefined</code>和<code>null</code>无法转为对象，所以对它们进行解构赋值，都会报错。</li>
+<li>函数的参数也可以使用解构赋值。</li>
+</ul>
+<h2 id="Promise-对象"><a href="#Promise-对象" class="headerlink" title="Promise 对象"></a>Promise 对象</h2><p>&emsp;&emsp;Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了 Promise 对象。</p>
+<p>所谓 Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<h3 id="Promise-的特点"><a href="#Promise-的特点" class="headerlink" title="Promise 的特点"></a>Promise 的特点</h3><ol>
+<li>对象的状态不受外界影响。Promise 对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</li>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise 对象的状态改变，只有两种可能：从 Pending 变为 Resolved 和从 Pending 变为 Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。如果改变已经发生了，就算你再对 Promise 对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。<br>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</li>
+<li>Promise 也有一些缺点。首先，无法取消 Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。最后，当处于 Pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</li>
+</ol>
+<h3 id="Promise-的基本用法"><a href="#Promise-的基本用法" class="headerlink" title="Promise 的基本用法"></a>Promise 的基本用法</h3><p>我们来实现一个延迟异步执行，用 setTimeout 实现，并内嵌一些复杂逻辑在<code>setTimeout()</code>中的回调中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">setTimeout(function()&#123;</div><div class="line">  console.log(&apos;Carson&apos;)</div><div class="line">  setTimeout(function()&#123;</div><div class="line">    console.log(&apos;Chen&apos;)</div><div class="line">  &#125;, 1000)</div><div class="line">&#125;, 1000)</div></pre></td></tr></table></figure></p>
+<p>可以用 ES6 中的 Promise 重写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var wait = ()=&gt; new Promise((resolve, reject)=&gt; &#123;setTimeout(resolve, 1000)&#125;)</div><div class="line"></div><div class="line">wait()</div><div class="line">    .then(function() &#123;</div><div class="line">        console.log(&apos;Carson&apos;)</div><div class="line">        return wait()</div><div class="line">    &#125;)</div><div class="line">    .then(function() &#123;</div><div class="line">        console.log(&apos;Chen&apos;)</div><div class="line">    &#125;)</div><div class="line">    .catch(function(error)&#123;</div><div class="line">        console.log(&apos;错误&apos; + error)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<p><code>.catch</code>方法是<code>.then(null, rejection)</code>的别名，用于指定发生错误时的回调函数。</p>
+<p>下面是一个用 Promise 对象实现的 Ajax 操作的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var getJSON = function(url) &#123;</div><div class="line">  var promise = new Promise(function(resolve, reject)&#123;</div><div class="line">    var ajax = new XMLHttpRequest();</div><div class="line">    ajax.open(&quot;GET&quot;, url);</div><div class="line">    ajax.onreadystatechange = handler;</div><div class="line">    ajax.responseType = &quot;json&quot;;</div><div class="line">    ajax.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);</div><div class="line">    ajax.send();</div><div class="line"></div><div class="line">    function handler() &#123;</div><div class="line">      if (this.readyState !== 4) &#123;</div><div class="line">        return;</div><div class="line">      &#125;</div><div class="line">      if (this.status === 200) &#123;</div><div class="line">        resolve(this.response);</div><div class="line">      &#125; else &#123;</div><div class="line">        reject(new Error(this.statusText));</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  return promise;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">getJSON(&quot;/posts.json&quot;).then(function(json) &#123;</div><div class="line">  console.log(&apos;获取内容: &apos; + json);</div><div class="line">&#125;, function(error) &#123;</div><div class="line">  console.error(&apos;出错了&apos;, error);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>上面代码中，<code>getJSON</code> 是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个 Promise 对象。需要注意的是，在<code>getJSON</code>内部，<code>resolve</code>函数和<code>reject</code>函数调用时，都带有参数。</p>
+<p>如果调用<code>resolve</code>函数和<code>reject</code>函数时带有参数，那么它们的参数会被传递给回调函数。<code>reject</code>函数的参数通常是<code>Error</code>对象的实例，表示抛出的错误；<code>resolve</code>函数的参数除了正常的值以外，还可能是另一个 Promise 实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作。</p>
+<h2 id="类（Class）和对象"><a href="#类（Class）和对象" class="headerlink" title="类（Class）和对象"></a>类（Class）和对象</h2><p>有了 ES6，我们可以用“类”来替换“构造函数”。</p>
+<blockquote>
+<p>JavaScript中，每个对象都有一个原型，那是另外的一个对象。所有JavaScript对象从它们的原型对象中继承方法和属性。</p>
+</blockquote>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>在 ES5 中，我们进行面向对象编程时使用构造函数来创建对象，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var Person = (function () &#123;</div><div class="line">  function MyConstructor(name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  MyConstructor.prototype.speak = function speak() &#123;</div><div class="line">    console.log(this.name + &apos; is very very handsome.&apos;);</div><div class="line">  &#125;;</div><div class="line">  return MyConstructor;</div><div class="line">&#125;)();</div><div class="line">var carson = new Person(&apos;carson&apos;);</div><div class="line">carson.speak(); // carson is very very handsome.</div></pre></td></tr></table></figure></p>
+<p>在 ES6 中，我们有了些新语法，能够用更少的模式化代码和新的关键字来实现同样的功能，比如 class 和 constructor。同样，可以比较一下哪种方式更清晰：<code>constructor.prototype.speak = function()</code> vs <code>speak()</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor(name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  speak() &#123;</div><div class="line">    console.log(this.name + &apos; is very very handsome.&apos;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">const carson = new Person(&apos;carson&apos;);</div><div class="line">carson.speak(); // carson is very very handsome.</div></pre></td></tr></table></figure></p>
+<p>我们看到，两种方式（ES5/6）在幕后输出了同样的结果，用起来没有差别。所以尽量使用 class 语法而避免直接操作 prototype。这能够令代码更简洁易懂。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>使用<code>NAME extends PARENT_NAME</code>语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Chen extends Person &#123;</div><div class="line">  speak() &#123;</div><div class="line">    super.speak();</div><div class="line">    console.log(&apos;Mingjia &apos; + this.name);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">const chen = new Chen(&apos;Chen&apos;);</div><div class="line">chen.speak(); // Chen is very very handsome.</div><div class="line">// Mingjia Chen.</div></pre></td></tr></table></figure></p>
+<h2 id="for-…-of"><a href="#for-…-of" class="headerlink" title="for … of"></a>for … of</h2><p>我们经历过从<code>for</code>到<code>forEach</code>，然后到<code>for ... of</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// for</div><div class="line">var array = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;];</div><div class="line">for (var i = 0; i &lt; array.length; i++) &#123;</div><div class="line">  var element = array[i];</div><div class="line">  console.log(element);</div><div class="line">&#125;</div><div class="line">// forEach</div><div class="line">array.forEach(function (element) &#123;</div><div class="line">  console.log(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6 中的<code>for ... of</code>也是用来处理循环的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// for...of</div><div class="line">const array = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;];</div><div class="line">for (const element of array) &#123;</div><div class="line">    console.log(element);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来。其他语言都有这项功能，比如 Ruby 的 <code>require</code>、Python 的 <code>import</code>，甚至就连 CSS 都有 <code>@import</code>，但是 JavaScript 任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。</p>
+<p>在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ES6 模块的设计思想，是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// CommonJS模块</div><div class="line">let &#123; stat, exists, readFile &#125; = require(&apos;fs&apos;);</div><div class="line"></div><div class="line">// 等同于</div><div class="line">let _fs = require(&apos;fs&apos;);</div><div class="line">let stat = _fs.stat;</div><div class="line">let exists = _fs.exists;</div><div class="line">let readfile = _fs.readfile;</div></pre></td></tr></table></figure></p>
+<p>上面代码的实质是整体加载 fs 模块（即加载 fs 的所有方法），生成一个对象（_fs），然后再从这个对象上面读取3个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。</p>
+<p>ES6 模块不是对象，而是通过<code>export</code>命令显式指定输出的代码，再通过<code>import</code>命令输入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// ES6模块</div><div class="line">import &#123; stat, exists, readFile &#125; from &apos;fs&apos;;</div></pre></td></tr></table></figure></p>
+<p>上面代码的实质是从 fs 模块加载3个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载，效率要比 CommonJS 模块的加载方式高。当然，这也导致了没法引用 ES6 模块本身，因为它不是对象。</p>
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>ES6 的模块自动采用严格模式，不管你有没有在模块头部加上<code>&quot;use strict&quot;</code>;。</p>
+<p>严格模式主要有以下限制：</p>
+<ul>
+<li>变量必须声明后再使用</li>
+<li>函数的参数不能有同名属性，否则报错</li>
+<li>不能使用<code>with</code>语句</li>
+<li>不能对只读属性赋值，否则报错</li>
+<li>不能使用前缀0表示八进制数，否则报错</li>
+<li>不能删除不可删除的属性，否则报错</li>
+<li>不能删除变量<code>delete prop</code>，会报错，只能删除属性<code>delete global[prop]</code></li>
+<li><code>eval</code>不会在它的外层作用域引入变量</li>
+<li><code>eval</code>和<code>arguments</code>不能被重新赋值</li>
+<li><code>arguments</code>不会自动反映函数参数的变化</li>
+<li>不能使用<code>arguments.callee</code></li>
+<li>不能使用<code>arguments.caller</code></li>
+<li>禁止<code>this</code>指向全局对象</li>
+<li>不能使用<code>fn.calle</code>r和<code>fn.arguments</code>获取函数调用的堆栈</li>
+<li>增加了保留字（比如<code>protected</code>、<code>static</code>和<code>interface</code>）<br>其中，尤其需要注意<code>this</code>的限制。ES6 模块之中，顶层的<code>this</code>指向<code>undefined</code>，即不应该在顶层代码使用<code>this</code>。</li>
+</ul>
+<h3 id="export-命令"><a href="#export-命令" class="headerlink" title="export 命令"></a>export 命令</h3><p>模块功能主要由两个命令构成：<code>export</code>和<code>import</code>。<code>export</code>命令用于规定模块的对外接口，<code>import</code>命令用于输入其他模块提供的功能。</p>
+<p>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用<code>export</code>关键字输出该变量。下面是一个 JS 文件，里面使用<code>export</code>命令输出变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// profile.js</div><div class="line">export var firstName = &apos;Carson&apos;;</div><div class="line">export var lastName = &apos;Chen&apos;;</div><div class="line">export var year = 1996;</div></pre></td></tr></table></figure></p>
+<p>上面代码是<code>profile.js</code>文件，保存了用户信息。ES6 将其视为一个模块，里面用<code>export</code>命令对外部输出了三个变量。</p>
+<p><code>export</code>的写法，除了像上面这样，还有另外一种。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// profile.js</div><div class="line">var firstName = &apos;Carson&apos;;</div><div class="line">var lastName = &apos;Chen&apos;;</div><div class="line">var years = 1996;</div><div class="line"></div><div class="line">export &#123;firstName, lastName, year as year&#125;;</div></pre></td></tr></table></figure></p>
+<p>上面代码在<code>export</code>命令后面，使用大括号指定所要输出的一组变量。它与前一种写法（直接放置在<code>var</code>语句前）是等价的，但是应该优先考虑使用这种写法。因为这样就可以在脚本尾部，一眼看清楚输出了哪些变量。</p>
+<h3 id="import-命令"><a href="#import-命令" class="headerlink" title="import 命令"></a>import 命令</h3><p>使用<code>export</code>命令定义了模块的对外接口以后，其他 JS 文件就可以通过<code>import</code>命令加载这个模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// main.js</div><div class="line">import &#123;firstName, lastName, year as years&#125; from &apos;./profile&apos;;</div><div class="line"></div><div class="line">function setName(element) &#123;</div><div class="line">  element.textContent = firstName + &apos; &apos; + lastName + &apos;age:&apos; + years;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码的<code>import</code>命令，用于加载<code>profile.js</code>文件，并从中输入变量。<code>import</code>命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（<code>profile.js</code>）对外接口的名称相同。</p>
+<h3 id="模块的整体加载"><a href="#模块的整体加载" class="headerlink" title="模块的整体加载"></a>模块的整体加载</h3><p>除了指定加载某个输出值，还可以使用整体加载，即用星号（*）指定一个对象，所有输出值都加载在这个对象上面。</p>
+<p>下面是一个<code>circle.js</code>文件，它输出两个方法<code>area</code>和<code>circumference</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// circle.js</div><div class="line"></div><div class="line">export function area(radius) &#123;</div><div class="line">  return Math.PI * radius * radius;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export function circumference(radius) &#123;</div><div class="line">  return 2 * Math.PI * radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>整体加载的写法如下；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import * as circle from &apos;./circle&apos;;</div><div class="line"></div><div class="line">console.log(&apos;圆面积：&apos; + circle.area(4));</div><div class="line">console.log(&apos;圆周长：&apos; + circle.circumference(14));</div></pre></td></tr></table></figure></p>
+<h3 id="export-default-命令"><a href="#export-default-命令" class="headerlink" title="export default 命令"></a>export default 命令</h3><p>从前面的例子可以看出，使用<code>import</code>命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。但是，用户肯定希望快速上手，未必愿意阅读文档，去了解模块有哪些属性和方法。</p>
+<p>为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到<code>export default</code>命令，为模块指定默认输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// export-default.js</div><div class="line">export default function () &#123;</div><div class="line">  console.log(&apos;foo&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码是一个模块文件<code>export-default.js</code>，它的默认输出是一个函数。</p>
+<p>其他模块加载该模块时，<code>import</code>命令可以为该匿名函数指定任意名字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// import-default.js</div><div class="line">import customName from &apos;./export-default&apos;;</div><div class="line">customName(); // &apos;foo&apos;</div></pre></td></tr></table></figure></p>
+<p>上面代码的<code>import</code>命令，可以用任意名称指向<code>export-default.js</code>输出的方法，这时就不需要知道原模块输出的函数名。需要注意的是，这时<code>import</code>命令后面，不使用大括号。</p>
+<h3 id="export-与-import-的复合写法"><a href="#export-与-import-的复合写法" class="headerlink" title="export 与 import 的复合写法"></a>export 与 import 的复合写法</h3><p>如果在一个模块之中，先输入后输出同一个模块，<code>import</code>语句可以与<code>export</code>语句写在一起。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">export &#123; foo, bar &#125; from &apos;my_module&apos;;</div><div class="line"></div><div class="line">// 等同于</div><div class="line">import &#123; foo, bar &#125; from &apos;my_module&apos;;</div><div class="line">export &#123; foo, bar &#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="模块的继承"><a href="#模块的继承" class="headerlink" title="模块的继承"></a>模块的继承</h3><p>模块之间也可以继承。</p>
+<p>假设有一个<code>circleplus</code>模块，继承了<code>circle</code>模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// circleplus.js</div><div class="line"></div><div class="line">export * from &apos;circle&apos;;</div><div class="line">export var e = 2.71828182846;</div><div class="line">export default function(x) &#123;</div><div class="line">  return Math.exp(x);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码中的<code>export *</code>，表示再输出<code>circle</code>模块的所有属性和方法。注意，<code>export *</code>命令会忽略<code>circle</code>模块的<code>default</code>方法。然后，上面代码又输出了自定义的<code>e</code>变量和默认方法。</p>
+<h1 id="ES6-的一些总结"><a href="#ES6-的一些总结" class="headerlink" title="ES6 的一些总结"></a>ES6 的一些总结</h1><p>ES6 中还有很多你可能都用不上（至少现在用不上）的可圈可点的特性，以下无特定顺序：</p>
+<ul>
+<li>Math / Number / String / Array / Object中新的方法</li>
+<li>二进制和八进制数据类型</li>
+<li>自动展开多余参数</li>
+<li>Symbols</li>
+<li>尾部调用优化</li>
+<li>generator</li>
+<li>更新的数据结构（如Map和Set）</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote>
+<p><a href="http://es6.ruanyifeng.com/" title="《ECMAScript 6 入门》" target="_blank" rel="external">《ECMAScript 6 入门》</a></p>
+</blockquote>
+
+      
+    </div>
+
+	<div>
+      
+        
+<blockquote class="blockquote-center">完<blockquote>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post_copyright" style="clear:both;">
+           <p><span>本文标题: </span><a href="/2017/03/22/ES6中常用特性/">ES6中常用特性</a></p>
+           <p><span>文章作者: </span><a href="/" title="访问 陈明佳 的个人博客">陈明佳</a></p>
+           <p><span>发布时间: </span>2017年3月22日 - 14时03分</p>
+           <p><span>最后更新: </span>2017年3月24日 - 15时03分</p>
+           <p><span>原始链接: </span><a href="/2017/03/22/ES6中常用特性/" title="ES6中常用特性">http://www.carsonchen.online/2017/03/22/ES6中常用特性/</a></p>
+           <p><span>许可协议: </span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial 4.0</a>转载请保留原文链接及作者。</p>
+        </div>
+      
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/微信小程序开发总结/" class="post-nav-title-link" rel="prev" title="微信小程序开发总结">
+                <i class="fa fa-chevron-left"></i> 微信小程序开发总结
+              </a>
+            
+          </div>
+
+		  <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/22/ES6中常用特性/"
+           data-title="ES6中常用特性" data-url="http://www.carsonchen.online/2017/03/22/ES6中常用特性/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.jpg"
+               alt="陈明佳" />
+          <p class="site-author-name" itemprop="name">陈明佳</p>
+          <p class="site-description motion-element" itemprop="description">念念不忘 必有回响</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" target="_blank" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarsonChenzzz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5485910731" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              友情链接
+            </div>
+
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://www.wuxubj.cn" title="务虚笔记" target="_blank">务虚笔记</a>
+                </span>
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://notes.iissnan.com" title="iissnan" target="_blank">iissnan</a>
+                </span>
+              
+
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-ECMAScrpit"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 ECMAScrpit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript的历史"><span class="nav-number">1.2.</span> <span class="nav-text">JavaScript的历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-常用特性"><span class="nav-number">2.</span> <span class="nav-text">ES6 常用特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#块级作用域及-let-const-命令"><span class="nav-number">2.1.</span> <span class="nav-text">块级作用域及 let/const 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认参数"><span class="nav-number">2.3.</span> <span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板表达式"><span class="nav-number">2.4.</span> <span class="nav-text">模板表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行字符串"><span class="nav-number">2.5.</span> <span class="nav-text">多行字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的解构赋值"><span class="nav-number">2.6.</span> <span class="nav-text">变量的解构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-对象"><span class="nav-number">2.7.</span> <span class="nav-text">Promise 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-的特点"><span class="nav-number">2.7.1.</span> <span class="nav-text">Promise 的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-的基本用法"><span class="nav-number">2.7.2.</span> <span class="nav-text">Promise 的基本用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类（Class）和对象"><span class="nav-number">2.8.</span> <span class="nav-text">类（Class）和对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象"><span class="nav-number">2.8.1.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">2.8.2.</span> <span class="nav-text">继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for-…-of"><span class="nav-number">2.9.</span> <span class="nav-text">for … of</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module"><span class="nav-number">2.10.</span> <span class="nav-text">Module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">2.10.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#严格模式"><span class="nav-number">2.10.2.</span> <span class="nav-text">严格模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-命令"><span class="nav-number">2.10.3.</span> <span class="nav-text">export 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-命令"><span class="nav-number">2.10.4.</span> <span class="nav-text">import 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块的整体加载"><span class="nav-number">2.10.5.</span> <span class="nav-text">模块的整体加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-default-命令"><span class="nav-number">2.10.6.</span> <span class="nav-text">export default 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-与-import-的复合写法"><span class="nav-number">2.10.7.</span> <span class="nav-text">export 与 import 的复合写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块的继承"><span class="nav-number">2.10.8.</span> <span class="nav-text">模块的继承</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-的一些总结"><span class="nav-number">3.</span> <span class="nav-text">ES6 的一些总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <div id="bottomheart" style="cursor:pointer;"><i class="fa fa-heart"></i></div>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈明佳</span><br/>
+  
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261488625'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261488625%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+  
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i> 访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i> 总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"carsonchen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PDil5it91EzSmFEkaC3W26H4-gzGzoHsz", "EOc1OIh0MkNJrEdIyFcmIv2C");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+  <script type="text/JavaScript">
+function hideElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="none";
+}
+
+function showElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="block";
+}
+</script>
+
+<script type="text/JavaScript">
+function showSubtitle()
+{
+  var siteNav=document.getElementById("site-nav");
+  if(siteNav.style.display=="block")
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="none";
+  }else
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="block";
+  }
+
+}
+</script>
+
+  <!-- 小心心动画 -->
+  <script type="text/javascript" src="/js/src/hexo-next-bottomheart.js"></script>
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+
+</body>
+</html>

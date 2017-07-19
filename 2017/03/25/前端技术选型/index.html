@@ -1,0 +1,1585 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端技术选型" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Carson Chen" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。">
+<meta name="keywords" content="前端技术选型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端技术选型">
+<meta property="og:url" content="http://www.carsonchen.online/2017/03/25/前端技术选型/index.html">
+<meta property="og:site_name" content="Carson Chen">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/cover.jpeg">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/modular.png">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/framework.png">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/php.png">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/mongo.jpg">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/factor.jpg">
+<meta property="og:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/rule.jpg">
+<meta property="og:updated_time" content="2017-03-25T02:57:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端技术选型">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。">
+<meta name="twitter:image" content="http://www.carsonchen.online/2017/03/25/前端技术选型/cover.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 前端技术选型 | Carson Chen  - 个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Carson Chen</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle" id="site-subtitle">Carson's Notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button onclick="showSubtitle()">
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav" id="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar-check-o"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端技术选型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-25T10:57:07+08:00" content="2017-03-25">
+              2017-03-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          <!-- 
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/25/前端技术选型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/前端技术选型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+           -->
+
+          
+
+          
+          
+             <span id="/2017/03/25/前端技术选型/" class="leancloud_visitors" data-flag-title="前端技术选型">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">热度 </span>
+               <span class="leancloud-visitors-count"></span>
+               <span>℃</span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2017/03/25/前端技术选型/cover.jpeg" alt=""><br>&emsp;&emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。<a id="more"></a><br>&emsp;&emsp;本文就以一个<strong>后台数据管理系统</strong>的项目为例，进行技术选型。</p>
+<h1 id="项目评估"><a href="#项目评估" class="headerlink" title="项目评估"></a>项目评估</h1><p>&emsp;&emsp;要说如何做好一个需求，展开来讲，可以写好几篇文章，这里只挑重点来考虑。最基本的，就是把握好 3W：What、When、How。</p>
+<p>为了下文不至于太过枯燥，这里进行需求场景的模拟，下文主要围绕这个“需求”，从 What、When、How 三个点展开来讲。</p>
+<h2 id="需求场景假设"><a href="#需求场景假设" class="headerlink" title="需求场景假设"></a>需求场景假设</h2><ul>
+<li>项目名称：后台数据管理系统</li>
+<li>项目组主要成员：UI设计师 1 名，前端工程师 3 名，后台工程师 5 名，产品经理：Vane</li>
+<li>产品需求：登陆、注册、数据的增删改查等</li>
+</ul>
+<h2 id="What：项目需求"><a href="#What：项目需求" class="headerlink" title="What：项目需求"></a>What：项目需求</h2><p>Are you kidding me？不就是做登录注册，增删改查么？老子会不知道么？其实你并不知道。导致这种情况发生的原因有哪些呢？</p>
+<ol>
+<li>产品经理：提的需求不明确。</li>
+<li>前端工程师：没做好需求确认。</li>
+</ol>
+<h3 id="需求不明确"><a href="#需求不明确" class="headerlink" title="需求不明确"></a>需求不明确</h3><ul>
+<li>是否支持手机或者邮箱注册</li>
+<li>是否支持第三方授权登陆</li>
+<li>相关注册条件</li>
+<li>是否所有数据都可以被删除，以及修改</li>
+<li>…</li>
+</ul>
+<h3 id="没做好需求确认"><a href="#没做好需求确认" class="headerlink" title="没做好需求确认"></a>没做好需求确认</h3><ul>
+<li>注册的用户名长度是否有限制</li>
+<li>注册时的密码时候有强度要求</li>
+<li>登陆时是否需要验证码</li>
+<li>验证不通过时如何提示信息</li>
+<li>…</li>
+</ul>
+<p>看到这里，大概应该明白，几乎不存在“100%明确”的需求。很多需求细节，同时也跟技术实现细节强相关，不能苛求产品经理都考虑到。这种情况下，作为开发者的我们应该主动找出问题，并与产品经理一起将细节敲定下来。</p>
+<p>以本文的项目项目为例，稍微明确下需求：</p>
+<ul>
+<li>手机或者邮箱注册都支持</li>
+<li>不支持第三方授权登陆</li>
+<li>注册成功或者不成功时以弹出窗的形式进行信息提示</li>
+</ul>
+<h2 id="When：项目周期"><a href="#When：项目周期" class="headerlink" title="When：项目周期"></a>When：项目周期</h2><p>一个同时有前端、后端参与的需求，精简后的需求生命周期，大概是这样的：</p>
+<blockquote>
+<p>需求提出–&gt;开发–&gt;联调–&gt;提交测试-&gt;需求发布</p>
+</blockquote>
+<p>一个需求的实际发布时间，大部分时候取决于实际的开发工作量。如何评估开发工作量呢？这里假设：</p>
+<ol>
+<li>UI设计师工作量2天，前端开发工作量 3 天，后端开发工作量 3 天</li>
+<li>周一开始工作</li>
+</ol>
+<p>所以是不是周三就可以完成了呢，当然。。不会，要得出一个靠谱的完成时间，至少需要明确以下内容：</p>
+<ul>
+<li>前端、后台 各自的工作量。</li>
+<li>前端、后台 投入研发的时间点。</li>
+<li>前端、后台 联调的工作量、时间点。</li>
+<li>需求提交测试的时间。</li>
+<li>需求测试的工作量。</li>
+</ul>
+<p><strong>最终，需求的完成时间点可能如下：（跟预期的还是会有出入的）</strong></p>
+<table>
+<thead>
+<tr>
+<th>周一</th>
+<th>周二</th>
+<th>周三</th>
+<th>周四</th>
+<th>周五</th>
+<th>周六</th>
+<th>日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI</td>
+<td>UI</td>
+<td></td>
+<td>UI+前端</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>前端</td>
+<td>前端</td>
+<td>前端</td>
+<td>UI+前端</td>
+<td>前后联调</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>后台</td>
+<td>后台</td>
+<td>后台</td>
+<td>前后联调</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>测试(无)</td>
+<td>测试(无)</td>
+</tr>
+</tbody>
+</table>
+<p>对于需求完成时间的评估，实际情况远比上面说的要更复杂。比如需要考虑节假日、成员休假、多个需求并行开发、需求存在外部依赖项等。这里就不多说(BB)了。</p>
+<h2 id="How：如何完成"><a href="#How：如何完成" class="headerlink" title="How：如何完成"></a>How：如何完成</h2><p>完成需求容易，如果要高质量完成，那就需要费点功夫了。同样的，只挑一些重要的来讲</p>
+<ul>
+<li>明确需求、关键时间点: 这块的重要性，再怎么强调也不为过。前面已经讲过了，这里不再赘述。</li>
+<li>严控开发、自测、提测质量: 作为一名合格的前端工程师，对自己的开发质量负责，这是最基本的要求。</li>
+<li>及时暴露风险: 风险意识非常重要。在需求完成的过程中，经常会有各种意外的小插曲出现。</li>
+<li>推动解决问题: 对于一个职场人能力的评判，“解决问题”的能力，是很重要的一个评估标准。</li>
+<li>关注线上质量: 这一点非常重要，但又是容易被忽略的一点。需求发布上线，是个重要的里程碑，但并不意味着需求的终点。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>方法论再多，最终还是需要人去落实。作为一名前端工程师，加强责任意识，主动承担，勤于总结，做社会主义合格的接班人（红领巾迎风飘扬~）。</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>&emsp;&emsp;前端发展的非常快，越来越多的开源项目和选择，让人老眼昏花，花枝乱颤，颤颤巍巍…不过每个前端团队都需要打造自己的前端开发体系，同时前端工程化代表着现在的前端开发不再是那种简单而无趣的远古生物，而是一个很性感的、让你情不自禁的想要去深入的美女（呃..深入的程度因人而异）。<br><img src="/2017/03/25/前端技术选型/modular.png" alt=""></p>
+<h2 id="第一阶段：库-框架选型"><a href="#第一阶段：库-框架选型" class="headerlink" title="第一阶段：库/框架选型"></a>第一阶段：库/框架选型</h2><p><img src="/2017/03/25/前端技术选型/framework.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Angular</th>
+<th style="text-align:center">Angular2</th>
+<th style="text-align:center">React</th>
+<th style="text-align:center">Vue</th>
+<th style="text-align:center">jQuery</th>
+<th style="text-align:center">Zepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Author</td>
+<td style="text-align:center">Google</td>
+<td style="text-align:center">Google</td>
+<td style="text-align:center">Facebook</td>
+<td style="text-align:center">尤雨溪</td>
+<td style="text-align:center">JohnResig</td>
+<td style="text-align:center">ThomasFuchs</td>
+</tr>
+<tr>
+<td style="text-align:center">Definition</td>
+<td style="text-align:center">MVVM</td>
+<td style="text-align:center">MVC</td>
+<td style="text-align:center">MVC→V</td>
+<td style="text-align:center">MVVM→VM</td>
+<td style="text-align:center">JS 库</td>
+<td style="text-align:center">JS 库</td>
+</tr>
+<tr>
+<td style="text-align:center">Release</td>
+<td style="text-align:center">2009</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">2013</td>
+</tr>
+<tr>
+<td style="text-align:center">Size</td>
+<td style="text-align:center">143k</td>
+<td style="text-align:center">764k</td>
+<td style="text-align:center">151k</td>
+<td style="text-align:center">25k</td>
+<td style="text-align:center">84k</td>
+<td style="text-align:center">57k</td>
+</tr>
+<tr>
+<td style="text-align:center">Language</td>
+<td style="text-align:center">JavaScript</td>
+<td style="text-align:center">TypeScript</td>
+<td style="text-align:center">JSX ES5 ES6</td>
+<td style="text-align:center">JSX ES5 ES6</td>
+<td style="text-align:center">JavaScript</td>
+<td style="text-align:center">JavaScript</td>
+</tr>
+<tr>
+<td style="text-align:center">DOM</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Virtual</td>
+<td style="text-align:center">Virtual</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Regular</td>
+</tr>
+<tr>
+<td style="text-align:center">Mobile Support</td>
+<td style="text-align:center">Ionic</td>
+<td style="text-align:center">Ionic</td>
+<td style="text-align:center">React Native</td>
+<td style="text-align:center">Weex</td>
+<td style="text-align:center">JQuery Mobile</td>
+<td style="text-align:center">Zepto</td>
+</tr>
+<tr>
+<td style="text-align:center">Designing</td>
+<td style="text-align:center">JS into HTML</td>
+<td style="text-align:center">JS into HTML</td>
+<td style="text-align:center">JS Centric</td>
+<td style="text-align:center">Templates</td>
+<td style="text-align:center">JS Centric</td>
+<td style="text-align:center">JS Centric</td>
+</tr>
+<tr>
+<td style="text-align:center">Binding</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">单向</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">———</td>
+<td style="text-align:center">———</td>
+</tr>
+<tr>
+<td style="text-align:center">Rendering</td>
+<td style="text-align:center">客户端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">客户端</td>
+<td style="text-align:center">客户端</td>
+</tr>
+</tbody>
+</table>
+<p>对比完以上几点，我们在概括一下主流框架的优缺点，以及其应用场景：</p>
+<h3 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h3><p>优点：</p>
+<ul>
+<li>是一套完整的框架，Angular 有自带的数据绑定、render 渲染、AngularUI 库，过滤器，directive(模板)，服务 q(defer), http，inject(依赖注入), factory, provide 等等一系列工具。</li>
+<li>整个框架充满了 DI 的思路，耦合性非常低。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>官方不在维护该框架。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>适合 SPA，面向较小的应用程序。</p>
+</blockquote>
+<h3 id="Angular2"><a href="#Angular2" class="headerlink" title="Angular2"></a>Angular2</h3><p>优点：</p>
+<ul>
+<li>有 Angular 1.0 的优点。</li>
+<li>可以使用 ES6 的语法。</li>
+<li>可以通过懒加载来引入依赖注入。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>Angular 的 2.0 版本几乎是推翻 1.0 版本重做的，要学习大量的东西，如模块、控制器、指令等，学习成本高。</li>
+<li>新，资料少，缺乏开发经验。</li>
+<li>环境搭建耗时。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>面向大型企业应用</p>
+</blockquote>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p>优点：</p>
+<ul>
+<li>采用 Virtual DOM 的思路，速度快，性能好。</li>
+<li>可以直接使用 ES6 的语法，通过 webpack 编译成浏览器兼容的 ES5，可以提高开发效率。</li>
+<li>状态管理时，都是使用<code>this.setData</code>，简单直观。</li>
+<li>React 可以在服务器上预渲染应用再发送到客户端。它可以从预渲染的静态内容中恢复一样的记录到动态应用程序中。搜索引擎的爬虫程序依赖的是服务端响应而不是 JavaScript 的执行，预渲染你的应用有助于搜索引擎优化。</li>
+<li>React更加关注UI的组件化，能较好的实现代码重用。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>和 Angular 相比，React 的组件比较少，</li>
+<li>React 比较“轻”，只有一个 view 层，当业务比较复杂，需要较完整的框架时，要引入 Flux, Redux。</li>
+<li>本身内容比较新，API 存在较大变化的风险。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>React 配合严格的 Flux 架构，适合超大规模多人协作的复杂项目。</p>
+</blockquote>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>优点：</p>
+<ul>
+<li>有完整的官方中文文档。</li>
+<li>数据双向绑定思路与 Angular 类似。</li>
+<li>组件化与数据流则与 React 类似，不同组件间单项数据流可防止主模块数据被污染。</li>
+<li>使用脚手架工具 vue-cli 可以快速地构建项目：单文件 Vue 组件，热加载，保存时检查代码，单元测试等，优秀的组件化，配合 router 等大型项目也可以轻易拿下。</li>
+<li>Vue.js 中指令和组件分得更清晰。指令只封装 DOM 操作，而组件代表一个自给自足的独立单元（有自己的视图和数据逻辑）。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>单项数据流，父子组件或平行组件间传递大量数据时需要基于 Vuex。</li>
+<li>不内置例如 AJAX，Route 等功能到核心包，而是以插件的方式加载。</li>
+<li>社区/组件生态相对 Angular 和 React 来说不够强大，现成的插件和组件不够完善。</li>
+<li>大量数据时，首次渲染性能不如 React。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>对于不会持续的小型的 Web 应用，使用 Vue 能带来短期内较高的开发效率。</p>
+</blockquote>
+<p>通过分析框架的特点并结合项目分析对比后，<strong>最终决定选择 Vue 框架来进行开发。</strong> 原因如下：</p>
+<ol>
+<li>Vue 是通过 Virtual Dom 抽象层来实现页面渲染，避免了高成本的常规 DOM 操作，尽管 Vue 和 React 都使用了 Virtual Dom 实现这一点，但 Vue 的 Virtual Dom 实现（复刻自 snabbdom）是更加轻量化的，所以在这里给 Vue 续一秒(查水表)。</li>
+<li>对比 Vue 和 React，它们都是 JavaScript 编写的，听起来这十分简单和优雅。然而不幸的事实是，React 中 JavaScript 内的 HTML 和 CSS 会产生很多痛点。JSX vs Templates，Templates 可读性，书写优雅，逻辑清晰…所以给 Vue 再续一秒(+1s)。</li>
+<li>Vue 的一些语法和 Angular 的很相似,但在 API 与设计两方面上 Vue.js 都比 Angular 1 简单得多，因此你可以快速地掌握它的全部特性并投入开发。所以 Vue + 1s。</li>
+<li>Angular 1 使用双向绑定，Vue 在不同组件间强制使用单向数据流。这使应用中的数据流更加清晰易懂。所以 Vue++。</li>
+<li>Angular 2 的学习曲线是非常陡峭的。即使不包括 TypeScript，它的开始指南中所用的就有 ES2015 标准的 JavaScript，18个 NPM 依赖包，4 个文件和超过 3 千多字的介绍，这一切都是为了完成个 Hello World。而Vue’s Hello World就非常简单。甚至我们并不用花费一整个页面去介绍它。所以如果项目经理选 Angular 2那也只好去学习(ci zhi)。</li>
+<li>jQuery 和 Zepto 不在考虑范围内。</li>
+</ol>
+<h2 id="第二阶段：UI-组件库选择"><a href="#第二阶段：UI-组件库选择" class="headerlink" title="第二阶段：UI 组件库选择"></a>第二阶段：UI 组件库选择</h2><p>在已经确定使用 Vue 框架来进行开发后，为了项目的开发效率，以及项目在移动端的兼容问题，我们决定选择一套高性能的 UI 组件库来服侍我们的 Vue, 我们先选择一些相对热门的进行比较：</p>
+<h3 id="兼容性较高的-UI-组件库"><a href="#兼容性较高的-UI-组件库" class="headerlink" title="兼容性较高的 UI 组件库"></a>兼容性较高的 UI 组件库</h3><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Semantic UI</th>
+<th style="text-align:center">JQuery EasyUI</th>
+<th style="text-align:center">Ant Design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Intro</td>
+<td style="text-align:center">Semantic is a UI framework designed for theming</td>
+<td style="text-align:center">jQuery EasyUI is a complete framework for HTML5 web page</td>
+<td style="text-align:center">An enterprise-class UI design language and React-based implementation</td>
+</tr>
+<tr>
+<td style="text-align:center">Interface</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">很一般</td>
+<td style="text-align:center">花里胡哨</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Form</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Table</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能完善</td>
+</tr>
+<tr>
+<td style="text-align:center">Functionality</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">丰满</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基于-Vue-的-UI-组件库"><a href="#基于-Vue-的-UI-组件库" class="headerlink" title="基于 Vue 的 UI 组件库"></a>基于 Vue 的 UI 组件库</h3><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">BootstrapVue</th>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">iView</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Intro</td>
+<td style="text-align:center">Bootstrap 4 components for Vue.js 2</td>
+<td style="text-align:center">A Vue.js 2.0 UI Toolkit for Web</td>
+<td style="text-align:center">A high quality UI Toolkit with both Vue.js 2.0 and 1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Interface</td>
+<td style="text-align:center">漂亮</td>
+<td style="text-align:center">自定义主题</td>
+<td style="text-align:center">精致 可自定义主题</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Form</td>
+<td style="text-align:center">无验证</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Table</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能完善</td>
+<td style="text-align:center">功能完善</td>
+</tr>
+<tr>
+<td style="text-align:center">Functionality</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">丰满</td>
+<td style="text-align:center">丰满</td>
+</tr>
+</tbody>
+</table>
+<p>在组件丰富程度，以及文档及示例和版本迭代等多方面的权衡后，考虑到该项目并没有涉及或使用到其他框架，所以我们选择一款基于 Vue.js 开发的可能是目前<strong>最波大汁多（捂脸）的 UI 组件库 – iView。</strong></p>
+<h2 id="第三阶段：后台选择"><a href="#第三阶段：后台选择" class="headerlink" title="第三阶段：后台选择"></a>第三阶段：后台选择</h2><p><img src="/2017/03/25/前端技术选型/php.png" alt=""><br>因为本人对后台方面涉及不是很多，所以这里不过多比较，只是说下看法：</p>
+<blockquote>
+<p>Node.js 有一定的学习曲线，对新手来说不够理想，但是如果你是位喜欢该语言的靠谱的 JavaScript 程序员，Node.js 不会让你失望。她更新潮而且提供自己网页开发的体验，你不会思念 PHP。<br>但是不要贬低 PHP，PHP 依然有活力，你不该因为 Node.js 快一些，新一些或新潮一些就去紧跟 Node.js 潮流。PHP 易学而且依然支持专业的编程技巧，帮助无处不在而且开发简单。甚至死忠的 Node.js 开发者也不得不在简单网站和应用时考虑使用 PHP。</p>
+</blockquote>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p><strong>因为本文项目将使用 Node.js 进行后台开发，所以下面来介绍一下这个活好不粘人的平台（Node.js 是一个平台，而不是一门语言）。</strong></p>
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
+<p>Node.js是 Ryan Dahl（谷歌）在 2009 年 开发的一个事件驱动 I/O 服务端 JavaScript 环境，基于 Google 的 V8 引擎，V8 引擎执行 Javascript 的速度非常快，性能非常好。</p>
+</blockquote>
+<h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><blockquote>
+<p>它的目标是帮助程序员构建高度可伸缩的应用程序，编写能够处理数万条同时连接到一个（只有一个）物理机的连接代码。</p>
+</blockquote>
+<h4 id="特点（优势）"><a href="#特点（优势）" class="headerlink" title="特点（优势）"></a>特点（优势）</h4><ol>
+<li>它基于 JavaScrip 的运行环境</li>
+<li>依赖于 Chrome v8</li>
+<li>事件驱动</li>
+<li>非阻塞 IO</li>
+<li>轻量级，可伸缩，便于实时数据的交互</li>
+<li>单线程，单进程</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>不适合CPU密集的应用</li>
+<li>只支持单核</li>
+<li>可靠性低,一旦代码某个环节崩溃，会使整个项目崩溃<blockquote>
+<p>原因：单线程，单进程</p>
+</blockquote>
+</li>
+<li>开源组件库质量参差不齐，更新快，向下不兼容</li>
+<li>Debug 不方便，错误没有 stack trace</li>
+<li>单线程，单进程</li>
+</ol>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<li>实时应用：如在线聊天，实时通知推送等等（如 socket.io ）</li>
+<li>分布式应用：通过高效的并行I/O使用已有的数据</li>
+<li>工具类应用：海量的工具，小到前端压缩部署（如 grunt ），大到桌面图形界面应用程序</li>
+<li>游戏类应用：游戏领域对实时和并发有很高的要求（如网易的 pomelo 框架）</li>
+<li>利用稳定接口提升 Web 渲染能力</li>
+<li>前后端编程语言环境统一：前端开发人员可以非常快速地切入到服务器端的开发（如著名的纯 Javascript 全栈式 MEAN 架构）</li>
+</ul>
+<p>从上面列举的场景不难看出<strong>她活很好，但是毕竟她还很年轻</strong> ，所以在 CPU 使用率较重、IO 使用率较轻的应用——如视频编码、人工智能等，Node.js 的优势无法发挥简单 Web 应用——此类应用的特点是，流量低、物理架构简单，Node.js 无法提供像 Ruby 的 Rails 或者 Python 的 Django 这样强大的框架 NoSQL + Node.js。如果仅仅是为了追求时髦，且自己对这两门技术还未深入（深度，很重要！）理解的情况下，不要冒险将业务系统搭建在这两个漂亮的名词上，建议使用 MySQL 之类的传统数据库。</p>
+<h4 id="基于-Node-js-的-Web-框架"><a href="#基于-Node-js-的-Web-框架" class="headerlink" title="基于 Node.js 的 Web 框架"></a>基于 Node.js 的 Web 框架</h4><p><strong>Express 框架：</strong><br>时间：</p>
+<blockquote>
+<p>2009年6月26日，TJ Holowaychuk 提交了 Express 的第一次 commit，在2010年1月2日，Express 0.0.1版本正式发布</p>
+</blockquote>
+<p>介绍：</p>
+<blockquote>
+<p>Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，它提供一系列强大的特性，帮助你创建各种 Web 和移动设备应用</p>
+</blockquote>
+<p>性能：</p>
+<blockquote>
+<p>Express 不对 Node.js 已有的特性进行二次抽象，只是在它之上扩展了 Web 应用所需的基本功能</p>
+</blockquote>
+<p>优点：</p>
+<blockquote>
+<p>历史更久，文档更完整，资料更多，深入人心</p>
+</blockquote>
+<p>缺点：</p>
+<blockquote>
+<p>Express 是基于 callback 来组合业务逻辑。Callback 有两大硬伤，一是不可组合，二是异常不可捕获。Express 的中间件模式虽然在一定程度上解决这两个问题，但没法彻底解决。</p>
+</blockquote>
+<p>升级后的 Express 4.x：</p>
+<blockquote>
+<p>性能：http 回发反应时间缩短了 20%，内存占用减少了 10%，去掉了对 connect 中间件的捆绑,增强的路由系统</p>
+</blockquote>
+<p><strong>Mongoose 框架</strong><br>Mongoose Web Server 是一款易于使用的 Web 服务器，它可以嵌入到其它应用程序中，为其提供 Web 接口，可以链接 Node.js 也可以链接 MongoDb。并且有很多优点：</p>
+<ol>
+<li>跨平台，支持 Windows、OS X 和 Linux</li>
+<li>支持 CGI, SSL, SSI, Digest (MD5) 认证，WebSocket 和 WebDAV</li>
+<li>支持断点续传和 URL 重写</li>
+<li>基于 IP 的 ACL，支持 Windows 服务，支持 GET, POST, HEAD, PUT, DELETE 方法</li>
+<li>Excluding files from serving by URI pattern</li>
+<li>下载速度限制，基于客户端子网和 URI 模式</li>
+<li>体积小，可执行文件只有 40k 左右</li>
+<li>可嵌入式，提供简单的 API (mongoose.h)。只需一个源码文件 mongoose.c</li>
+<li>嵌入式</li>
+<li>提供 Python 和 C# 版本</li>
+<li>采用 MIT 授权协议</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>Node.js 会拥有大量的客人，但其未来发展也存在瓶颈（毕竟精力有限），而且适用领域有局限性。</p>
+<h2 id="第四阶段：数据库选择"><a href="#第四阶段：数据库选择" class="headerlink" title="第四阶段：数据库选择"></a>第四阶段：数据库选择</h2><p><img src="/2017/03/25/前端技术选型/mongo.jpg" alt=""><br>在选择完前端框架，UI 组件，以及后台平台后终于到了本文项目的最后一个阶段，首先我们先选择几个<strong>数据库届的头牌</strong>进行横向比较：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">MongoDB</th>
+<th style="text-align:center">MySQL</th>
+<th style="text-align:center">Oracle</th>
+<th style="text-align:center">SQL Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">开源</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">需要购买（贵）</td>
+<td style="text-align:center">需要购买（性价比高）</td>
+</tr>
+<tr>
+<td style="text-align:center">类型</td>
+<td style="text-align:center">非关系型</td>
+<td style="text-align:center">关系型</td>
+<td style="text-align:center">关系型</td>
+<td style="text-align:center">关系型</td>
+</tr>
+<tr>
+<td style="text-align:center">读写</td>
+<td style="text-align:center">MongoDB 读写速度比 MySQL 有明显的优势，MongoDB 读写速度大约 2.5w 次每秒</td>
+<td style="text-align:center">对于海量数据，MySQL 的读写速度会有一点瓶颈</td>
+<td style="text-align:center">高效率，可靠性好，适应量读写的数据库</td>
+<td style="text-align:center">没有前三种好</td>
+</tr>
+<tr>
+<td style="text-align:center">创建表</td>
+<td style="text-align:center">MongoDB 不需单独创建表，直接<code>use</code>就可以，插入数据时也只需要直接插入</td>
+<td style="text-align:center">需要用<code>create</code>命令创建表，创建，删除，插入都需要用 SQL 命令</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">事务处理</td>
+<td style="text-align:center">原子性，一致性，隔离型，持久性</td>
+<td style="text-align:center">不支持事务的处理</td>
+<td style="text-align:center">支持多用户，大事务的事务处理，数据安全性，完整性控制</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">空间</td>
+<td style="text-align:center">占用空间大</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">占用空间大</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">工具</td>
+<td style="text-align:center">新，没有成熟的工具维护</td>
+<td style="text-align:center">维护工具多，关系型数据库存在已久（调试，管理，优化简单）</td>
+<td style="text-align:center">有成熟的工具</td>
+<td style="text-align:center">有成熟的工具</td>
+</tr>
+<tr>
+<td style="text-align:center">扩展性</td>
+<td style="text-align:center">扩展性较好</td>
+<td style="text-align:center">有 join 这样的多表查询机制的限制导致扩展艰难</td>
+<td style="text-align:center">只能运行在微软的 Windows 平台，当用户连接多事性能会很差，并且不够稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">学习成本</td>
+<td style="text-align:center">不支持 SQL 标准，之前项目中用到过 MongoDB ,具有实战经验</td>
+<td style="text-align:center">有 SQL 基础</td>
+<td style="text-align:center">学习成本高，没有人用过，支持 Java</td>
+<td style="text-align:center">支持 SQL 标准</td>
+</tr>
+<tr>
+<td style="text-align:center">数据量</td>
+<td style="text-align:center">对于千万级数据量来说是OK的</td>
+<td style="text-align:center">可以处理拥有千万级的大型数据</td>
+<td style="text-align:center">支持亿级数据量</td>
+<td style="text-align:center">支持千万级数据量</td>
+</tr>
+<tr>
+<td style="text-align:center">分布式数据处理</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">支持的语言</td>
+<td style="text-align:center">支持 Node.js, PHP, Pyhon, C++</td>
+<td style="text-align:center">支持 PHP</td>
+<td style="text-align:center">支持 Java</td>
+<td style="text-align:center">支持 .Net</td>
+</tr>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">使用方便</td>
+<td style="text-align:center">使用与所有平台</td>
+<td style="text-align:center">可用性强，可扩展性强，数据安全性强，稳定性强</td>
+<td style="text-align:center">图形户的用户界面，操作更直观，简单</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;基于以上信息，如果从经济利益上出发考虑，Oracle 和 SQLServer 两款都属于收费型，所使用的后台语言也较难，不利于开发，而 MongoDB 和 MySQL 都属于开源免费的。从功能和存储量综合来考虑，Oracle 功能更加完善，支持多用户、大事务量的事务处理，安全性也更好，然而成本高，需要 Java 支持。其次是 SQL Server，性价比较高，但是开放性较差，只能在 Windows 平台运行，性能也不够稳定。MongoDB 不支持事务，但是使用方便，存储也方便，支持动态查询等，也有过实践经验。最后 MySQL，功能不是很健全，但是能处理大型数据。所以<strong>本文项目将会选择 MongoDB 进行数据支持</strong>。</p>
+<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p><br></p>
+<blockquote>
+<p>本文项目将使用 Vue.js + iView + Node.js + MongoDB 进行开发。</p>
+</blockquote>
+<p>&emsp;&emsp;有太多的选择，就是一件麻烦的事；没有选择时，就是一件更麻烦的事；有唯一的选择时，事情就会变得超级简单。但是技术选型也是没有银弹的——没有一个框架能解决所有的问题。为了更好的考量不同的因素：<br><img src="/2017/03/25/前端技术选型/factor.jpg" alt=""></p>
+<p>并且需要列出重要的象限，如开发效率、团队喜好等等。并依此来决定，哪个框架更适合当前的团队和项目。<br><img src="/2017/03/25/前端技术选型/rule.jpg" alt=""><br>总之，没有任何一项技术可以适用在所有场景，所以不同场景下的技术没有可比性。没有银弹和最好的语言和框架。</p>
+
+      
+    </div>
+
+	<div>
+      
+        
+<blockquote class="blockquote-center">完<blockquote>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post_copyright" style="clear:both;">
+           <p><span>本文标题: </span><a href="/2017/03/25/前端技术选型/">前端技术选型</a></p>
+           <p><span>文章作者: </span><a href="/" title="访问 陈明佳 的个人博客">陈明佳</a></p>
+           <p><span>发布时间: </span>2017年3月25日 - 10时03分</p>
+           <p><span>最后更新: </span>2017年3月25日 - 10时03分</p>
+           <p><span>原始链接: </span><a href="/2017/03/25/前端技术选型/" title="前端技术选型">http://www.carsonchen.online/2017/03/25/前端技术选型/</a></p>
+           <p><span>许可协议: </span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial 4.0</a>转载请保留原文链接及作者。</p>
+        </div>
+      
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+		  <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/24/微信小程序开发总结/" class="post-nav-title-link" rel="next" title="微信小程序开发总结">
+                微信小程序开发总结  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/25/前端技术选型/"
+           data-title="前端技术选型" data-url="http://www.carsonchen.online/2017/03/25/前端技术选型/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/me.jpg"
+               alt="陈明佳" />
+          <p class="site-author-name" itemprop="name">陈明佳</p>
+          <p class="site-description motion-element" itemprop="description">念念不忘 必有回响</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" target="_blank" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CarsonChenzzz" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5485910731" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-link"></i>
+              友情链接
+            </div>
+
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://www.wuxubj.cn" title="务虚笔记" target="_blank">务虚笔记</a>
+                </span>
+              
+                <span class="links-of-author-item" style="text-align:center">
+                  <a href="http://notes.iissnan.com" title="iissnan" target="_blank">iissnan</a>
+                </span>
+              
+
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目评估"><span class="nav-number">1.</span> <span class="nav-text">项目评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求场景假设"><span class="nav-number">1.1.</span> <span class="nav-text">需求场景假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What：项目需求"><span class="nav-number">1.2.</span> <span class="nav-text">What：项目需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求不明确"><span class="nav-number">1.2.1.</span> <span class="nav-text">需求不明确</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没做好需求确认"><span class="nav-number">1.2.2.</span> <span class="nav-text">没做好需求确认</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#When：项目周期"><span class="nav-number">1.3.</span> <span class="nav-text">When：项目周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How：如何完成"><span class="nav-number">1.4.</span> <span class="nav-text">How：如何完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技术选型"><span class="nav-number">2.</span> <span class="nav-text">技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一阶段：库-框架选型"><span class="nav-number">2.1.</span> <span class="nav-text">第一阶段：库/框架选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Angular"><span class="nav-number">2.1.1.</span> <span class="nav-text">Angular</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Angular2"><span class="nav-number">2.1.2.</span> <span class="nav-text">Angular2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React"><span class="nav-number">2.1.3.</span> <span class="nav-text">React</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue"><span class="nav-number">2.1.4.</span> <span class="nav-text">Vue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二阶段：UI-组件库选择"><span class="nav-number">2.2.</span> <span class="nav-text">第二阶段：UI 组件库选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性较高的-UI-组件库"><span class="nav-number">2.2.1.</span> <span class="nav-text">兼容性较高的 UI 组件库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于-Vue-的-UI-组件库"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于 Vue 的 UI 组件库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三阶段：后台选择"><span class="nav-number">2.3.</span> <span class="nav-text">第三阶段：后台选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">2.3.1.</span> <span class="nav-text">Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目标"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点（优势）"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">特点（优势）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于-Node-js-的-Web-框架"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">基于 Node.js 的 Web 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.3.1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四阶段：数据库选择"><span class="nav-number">2.4.</span> <span class="nav-text">第四阶段：数据库选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结-1"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <div id="bottomheart" style="cursor:pointer;"><i class="fa fa-heart"></i></div>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈明佳</span><br/>
+  
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261488625'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261488625%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+  
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i> 访问人数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i> 总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"carsonchen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PDil5it91EzSmFEkaC3W26H4-gzGzoHsz", "EOc1OIh0MkNJrEdIyFcmIv2C");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  <div style="display: none;">
+    <script src="http://s6.cnzz.com/stat.php?id=1261488625&web_id=1261488625" type="text/javascript"></script>
+  </div>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+  <script type="text/JavaScript">
+function hideElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="none";
+}
+
+function showElement(elementID)
+{
+	var myele=document.getElementById(elementID);
+	myele.style.display="block";
+}
+</script>
+
+<script type="text/JavaScript">
+function showSubtitle()
+{
+  var siteNav=document.getElementById("site-nav");
+  if(siteNav.style.display=="block")
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="none";
+  }else
+  {
+   var subTitle=document.getElementById("site-subtitle");
+   subTitle.style.display="block";
+  }
+
+}
+</script>
+
+  <!-- 小心心动画 -->
+  <script type="text/javascript" src="/js/src/hexo-next-bottomheart.js"></script>
+
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+
+
+</body>
+</html>

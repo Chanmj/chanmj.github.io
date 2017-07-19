@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Carson Chen</title>
+  <subtitle>Carson&#39;s Notes</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.carsonchen.online/"/>
+  <updated>2017-03-25T02:57:07.000Z</updated>
+  <id>http://www.carsonchen.online/</id>
+  
+  <author>
+    <name>陈明佳</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端技术选型</title>
+    <link href="http://www.carsonchen.online/2017/03/25/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    <id>http://www.carsonchen.online/2017/03/25/前端技术选型/</id>
+    <published>2017-03-25T02:57:07.000Z</published>
+    <updated>2017-03-25T02:57:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2017/03/25/前端技术选型/cover.jpeg" alt=""><br>&emsp;&emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。<a id="more"></a><br>&emsp;&emsp;本文就以一个<strong>后台数据管理系统</strong>的项目为例，进行技术选型。</p>
+<h1 id="项目评估"><a href="#项目评估" class="headerlink" title="项目评估"></a>项目评估</h1><p>&emsp;&emsp;要说如何做好一个需求，展开来讲，可以写好几篇文章，这里只挑重点来考虑。最基本的，就是把握好 3W：What、When、How。</p>
+<p>为了下文不至于太过枯燥，这里进行需求场景的模拟，下文主要围绕这个“需求”，从 What、When、How 三个点展开来讲。</p>
+<h2 id="需求场景假设"><a href="#需求场景假设" class="headerlink" title="需求场景假设"></a>需求场景假设</h2><ul>
+<li>项目名称：后台数据管理系统</li>
+<li>项目组主要成员：UI设计师 1 名，前端工程师 3 名，后台工程师 5 名，产品经理：Vane</li>
+<li>产品需求：登陆、注册、数据的增删改查等</li>
+</ul>
+<h2 id="What：项目需求"><a href="#What：项目需求" class="headerlink" title="What：项目需求"></a>What：项目需求</h2><p>Are you kidding me？不就是做登录注册，增删改查么？老子会不知道么？其实你并不知道。导致这种情况发生的原因有哪些呢？</p>
+<ol>
+<li>产品经理：提的需求不明确。</li>
+<li>前端工程师：没做好需求确认。</li>
+</ol>
+<h3 id="需求不明确"><a href="#需求不明确" class="headerlink" title="需求不明确"></a>需求不明确</h3><ul>
+<li>是否支持手机或者邮箱注册</li>
+<li>是否支持第三方授权登陆</li>
+<li>相关注册条件</li>
+<li>是否所有数据都可以被删除，以及修改</li>
+<li>…</li>
+</ul>
+<h3 id="没做好需求确认"><a href="#没做好需求确认" class="headerlink" title="没做好需求确认"></a>没做好需求确认</h3><ul>
+<li>注册的用户名长度是否有限制</li>
+<li>注册时的密码时候有强度要求</li>
+<li>登陆时是否需要验证码</li>
+<li>验证不通过时如何提示信息</li>
+<li>…</li>
+</ul>
+<p>看到这里，大概应该明白，几乎不存在“100%明确”的需求。很多需求细节，同时也跟技术实现细节强相关，不能苛求产品经理都考虑到。这种情况下，作为开发者的我们应该主动找出问题，并与产品经理一起将细节敲定下来。</p>
+<p>以本文的项目项目为例，稍微明确下需求：</p>
+<ul>
+<li>手机或者邮箱注册都支持</li>
+<li>不支持第三方授权登陆</li>
+<li>注册成功或者不成功时以弹出窗的形式进行信息提示</li>
+</ul>
+<h2 id="When：项目周期"><a href="#When：项目周期" class="headerlink" title="When：项目周期"></a>When：项目周期</h2><p>一个同时有前端、后端参与的需求，精简后的需求生命周期，大概是这样的：</p>
+<blockquote>
+<p>需求提出–&gt;开发–&gt;联调–&gt;提交测试-&gt;需求发布</p>
+</blockquote>
+<p>一个需求的实际发布时间，大部分时候取决于实际的开发工作量。如何评估开发工作量呢？这里假设：</p>
+<ol>
+<li>UI设计师工作量2天，前端开发工作量 3 天，后端开发工作量 3 天</li>
+<li>周一开始工作</li>
+</ol>
+<p>所以是不是周三就可以完成了呢，当然。。不会，要得出一个靠谱的完成时间，至少需要明确以下内容：</p>
+<ul>
+<li>前端、后台 各自的工作量。</li>
+<li>前端、后台 投入研发的时间点。</li>
+<li>前端、后台 联调的工作量、时间点。</li>
+<li>需求提交测试的时间。</li>
+<li>需求测试的工作量。</li>
+</ul>
+<p><strong>最终，需求的完成时间点可能如下：（跟预期的还是会有出入的）</strong></p>
+<table>
+<thead>
+<tr>
+<th>周一</th>
+<th>周二</th>
+<th>周三</th>
+<th>周四</th>
+<th>周五</th>
+<th>周六</th>
+<th>日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI</td>
+<td>UI</td>
+<td></td>
+<td>UI+前端</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>前端</td>
+<td>前端</td>
+<td>前端</td>
+<td>UI+前端</td>
+<td>前后联调</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>后台</td>
+<td>后台</td>
+<td>后台</td>
+<td>前后联调</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>测试(无)</td>
+<td>测试(无)</td>
+</tr>
+</tbody>
+</table>
+<p>对于需求完成时间的评估，实际情况远比上面说的要更复杂。比如需要考虑节假日、成员休假、多个需求并行开发、需求存在外部依赖项等。这里就不多说(BB)了。</p>
+<h2 id="How：如何完成"><a href="#How：如何完成" class="headerlink" title="How：如何完成"></a>How：如何完成</h2><p>完成需求容易，如果要高质量完成，那就需要费点功夫了。同样的，只挑一些重要的来讲</p>
+<ul>
+<li>明确需求、关键时间点: 这块的重要性，再怎么强调也不为过。前面已经讲过了，这里不再赘述。</li>
+<li>严控开发、自测、提测质量: 作为一名合格的前端工程师，对自己的开发质量负责，这是最基本的要求。</li>
+<li>及时暴露风险: 风险意识非常重要。在需求完成的过程中，经常会有各种意外的小插曲出现。</li>
+<li>推动解决问题: 对于一个职场人能力的评判，“解决问题”的能力，是很重要的一个评估标准。</li>
+<li>关注线上质量: 这一点非常重要，但又是容易被忽略的一点。需求发布上线，是个重要的里程碑，但并不意味着需求的终点。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>方法论再多，最终还是需要人去落实。作为一名前端工程师，加强责任意识，主动承担，勤于总结，做社会主义合格的接班人（红领巾迎风飘扬~）。</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>&emsp;&emsp;前端发展的非常快，越来越多的开源项目和选择，让人老眼昏花，花枝乱颤，颤颤巍巍…不过每个前端团队都需要打造自己的前端开发体系，同时前端工程化代表着现在的前端开发不再是那种简单而无趣的远古生物，而是一个很性感的、让你情不自禁的想要去深入的美女（呃..深入的程度因人而异）。<br><img src="/2017/03/25/前端技术选型/modular.png" alt=""></p>
+<h2 id="第一阶段：库-框架选型"><a href="#第一阶段：库-框架选型" class="headerlink" title="第一阶段：库/框架选型"></a>第一阶段：库/框架选型</h2><p><img src="/2017/03/25/前端技术选型/framework.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Angular</th>
+<th style="text-align:center">Angular2</th>
+<th style="text-align:center">React</th>
+<th style="text-align:center">Vue</th>
+<th style="text-align:center">jQuery</th>
+<th style="text-align:center">Zepto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Author</td>
+<td style="text-align:center">Google</td>
+<td style="text-align:center">Google</td>
+<td style="text-align:center">Facebook</td>
+<td style="text-align:center">尤雨溪</td>
+<td style="text-align:center">JohnResig</td>
+<td style="text-align:center">ThomasFuchs</td>
+</tr>
+<tr>
+<td style="text-align:center">Definition</td>
+<td style="text-align:center">MVVM</td>
+<td style="text-align:center">MVC</td>
+<td style="text-align:center">MVC→V</td>
+<td style="text-align:center">MVVM→VM</td>
+<td style="text-align:center">JS 库</td>
+<td style="text-align:center">JS 库</td>
+</tr>
+<tr>
+<td style="text-align:center">Release</td>
+<td style="text-align:center">2009</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">2013</td>
+</tr>
+<tr>
+<td style="text-align:center">Size</td>
+<td style="text-align:center">143k</td>
+<td style="text-align:center">764k</td>
+<td style="text-align:center">151k</td>
+<td style="text-align:center">25k</td>
+<td style="text-align:center">84k</td>
+<td style="text-align:center">57k</td>
+</tr>
+<tr>
+<td style="text-align:center">Language</td>
+<td style="text-align:center">JavaScript</td>
+<td style="text-align:center">TypeScript</td>
+<td style="text-align:center">JSX ES5 ES6</td>
+<td style="text-align:center">JSX ES5 ES6</td>
+<td style="text-align:center">JavaScript</td>
+<td style="text-align:center">JavaScript</td>
+</tr>
+<tr>
+<td style="text-align:center">DOM</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Virtual</td>
+<td style="text-align:center">Virtual</td>
+<td style="text-align:center">Regular</td>
+<td style="text-align:center">Regular</td>
+</tr>
+<tr>
+<td style="text-align:center">Mobile Support</td>
+<td style="text-align:center">Ionic</td>
+<td style="text-align:center">Ionic</td>
+<td style="text-align:center">React Native</td>
+<td style="text-align:center">Weex</td>
+<td style="text-align:center">JQuery Mobile</td>
+<td style="text-align:center">Zepto</td>
+</tr>
+<tr>
+<td style="text-align:center">Designing</td>
+<td style="text-align:center">JS into HTML</td>
+<td style="text-align:center">JS into HTML</td>
+<td style="text-align:center">JS Centric</td>
+<td style="text-align:center">Templates</td>
+<td style="text-align:center">JS Centric</td>
+<td style="text-align:center">JS Centric</td>
+</tr>
+<tr>
+<td style="text-align:center">Binding</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">单向</td>
+<td style="text-align:center">双向</td>
+<td style="text-align:center">———</td>
+<td style="text-align:center">———</td>
+</tr>
+<tr>
+<td style="text-align:center">Rendering</td>
+<td style="text-align:center">客户端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">服务器端</td>
+<td style="text-align:center">客户端</td>
+<td style="text-align:center">客户端</td>
+</tr>
+</tbody>
+</table>
+<p>对比完以上几点，我们在概括一下主流框架的优缺点，以及其应用场景：</p>
+<h3 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h3><p>优点：</p>
+<ul>
+<li>是一套完整的框架，Angular 有自带的数据绑定、render 渲染、AngularUI 库，过滤器，directive(模板)，服务 q(defer), http，inject(依赖注入), factory, provide 等等一系列工具。</li>
+<li>整个框架充满了 DI 的思路，耦合性非常低。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>官方不在维护该框架。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>适合 SPA，面向较小的应用程序。</p>
+</blockquote>
+<h3 id="Angular2"><a href="#Angular2" class="headerlink" title="Angular2"></a>Angular2</h3><p>优点：</p>
+<ul>
+<li>有 Angular 1.0 的优点。</li>
+<li>可以使用 ES6 的语法。</li>
+<li>可以通过懒加载来引入依赖注入。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>Angular 的 2.0 版本几乎是推翻 1.0 版本重做的，要学习大量的东西，如模块、控制器、指令等，学习成本高。</li>
+<li>新，资料少，缺乏开发经验。</li>
+<li>环境搭建耗时。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>面向大型企业应用</p>
+</blockquote>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p>优点：</p>
+<ul>
+<li>采用 Virtual DOM 的思路，速度快，性能好。</li>
+<li>可以直接使用 ES6 的语法，通过 webpack 编译成浏览器兼容的 ES5，可以提高开发效率。</li>
+<li>状态管理时，都是使用<code>this.setData</code>，简单直观。</li>
+<li>React 可以在服务器上预渲染应用再发送到客户端。它可以从预渲染的静态内容中恢复一样的记录到动态应用程序中。搜索引擎的爬虫程序依赖的是服务端响应而不是 JavaScript 的执行，预渲染你的应用有助于搜索引擎优化。</li>
+<li>React更加关注UI的组件化，能较好的实现代码重用。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>和 Angular 相比，React 的组件比较少，</li>
+<li>React 比较“轻”，只有一个 view 层，当业务比较复杂，需要较完整的框架时，要引入 Flux, Redux。</li>
+<li>本身内容比较新，API 存在较大变化的风险。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>React 配合严格的 Flux 架构，适合超大规模多人协作的复杂项目。</p>
+</blockquote>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>优点：</p>
+<ul>
+<li>有完整的官方中文文档。</li>
+<li>数据双向绑定思路与 Angular 类似。</li>
+<li>组件化与数据流则与 React 类似，不同组件间单项数据流可防止主模块数据被污染。</li>
+<li>使用脚手架工具 vue-cli 可以快速地构建项目：单文件 Vue 组件，热加载，保存时检查代码，单元测试等，优秀的组件化，配合 router 等大型项目也可以轻易拿下。</li>
+<li>Vue.js 中指令和组件分得更清晰。指令只封装 DOM 操作，而组件代表一个自给自足的独立单元（有自己的视图和数据逻辑）。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>单项数据流，父子组件或平行组件间传递大量数据时需要基于 Vuex。</li>
+<li>不内置例如 AJAX，Route 等功能到核心包，而是以插件的方式加载。</li>
+<li>社区/组件生态相对 Angular 和 React 来说不够强大，现成的插件和组件不够完善。</li>
+<li>大量数据时，首次渲染性能不如 React。</li>
+</ul>
+<p>应用场景：</p>
+<blockquote>
+<p>对于不会持续的小型的 Web 应用，使用 Vue 能带来短期内较高的开发效率。</p>
+</blockquote>
+<p>通过分析框架的特点并结合项目分析对比后，<strong>最终决定选择 Vue 框架来进行开发。</strong> 原因如下：</p>
+<ol>
+<li>Vue 是通过 Virtual Dom 抽象层来实现页面渲染，避免了高成本的常规 DOM 操作，尽管 Vue 和 React 都使用了 Virtual Dom 实现这一点，但 Vue 的 Virtual Dom 实现（复刻自 snabbdom）是更加轻量化的，所以在这里给 Vue 续一秒(查水表)。</li>
+<li>对比 Vue 和 React，它们都是 JavaScript 编写的，听起来这十分简单和优雅。然而不幸的事实是，React 中 JavaScript 内的 HTML 和 CSS 会产生很多痛点。JSX vs Templates，Templates 可读性，书写优雅，逻辑清晰…所以给 Vue 再续一秒(+1s)。</li>
+<li>Vue 的一些语法和 Angular 的很相似,但在 API 与设计两方面上 Vue.js 都比 Angular 1 简单得多，因此你可以快速地掌握它的全部特性并投入开发。所以 Vue + 1s。</li>
+<li>Angular 1 使用双向绑定，Vue 在不同组件间强制使用单向数据流。这使应用中的数据流更加清晰易懂。所以 Vue++。</li>
+<li>Angular 2 的学习曲线是非常陡峭的。即使不包括 TypeScript，它的开始指南中所用的就有 ES2015 标准的 JavaScript，18个 NPM 依赖包，4 个文件和超过 3 千多字的介绍，这一切都是为了完成个 Hello World。而Vue’s Hello World就非常简单。甚至我们并不用花费一整个页面去介绍它。所以如果项目经理选 Angular 2那也只好去学习(ci zhi)。</li>
+<li>jQuery 和 Zepto 不在考虑范围内。</li>
+</ol>
+<h2 id="第二阶段：UI-组件库选择"><a href="#第二阶段：UI-组件库选择" class="headerlink" title="第二阶段：UI 组件库选择"></a>第二阶段：UI 组件库选择</h2><p>在已经确定使用 Vue 框架来进行开发后，为了项目的开发效率，以及项目在移动端的兼容问题，我们决定选择一套高性能的 UI 组件库来服侍我们的 Vue, 我们先选择一些相对热门的进行比较：</p>
+<h3 id="兼容性较高的-UI-组件库"><a href="#兼容性较高的-UI-组件库" class="headerlink" title="兼容性较高的 UI 组件库"></a>兼容性较高的 UI 组件库</h3><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Semantic UI</th>
+<th style="text-align:center">JQuery EasyUI</th>
+<th style="text-align:center">Ant Design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Intro</td>
+<td style="text-align:center">Semantic is a UI framework designed for theming</td>
+<td style="text-align:center">jQuery EasyUI is a complete framework for HTML5 web page</td>
+<td style="text-align:center">An enterprise-class UI design language and React-based implementation</td>
+</tr>
+<tr>
+<td style="text-align:center">Interface</td>
+<td style="text-align:center">一般</td>
+<td style="text-align:center">很一般</td>
+<td style="text-align:center">花里胡哨</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Form</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Table</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能完善</td>
+</tr>
+<tr>
+<td style="text-align:center">Functionality</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">丰满</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基于-Vue-的-UI-组件库"><a href="#基于-Vue-的-UI-组件库" class="headerlink" title="基于 Vue 的 UI 组件库"></a>基于 Vue 的 UI 组件库</h3><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">BootstrapVue</th>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">iView</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Intro</td>
+<td style="text-align:center">Bootstrap 4 components for Vue.js 2</td>
+<td style="text-align:center">A Vue.js 2.0 UI Toolkit for Web</td>
+<td style="text-align:center">A high quality UI Toolkit with both Vue.js 2.0 and 1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Interface</td>
+<td style="text-align:center">漂亮</td>
+<td style="text-align:center">自定义主题</td>
+<td style="text-align:center">精致 可自定义主题</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Form</td>
+<td style="text-align:center">无验证</td>
+<td style="text-align:center">有验证</td>
+<td style="text-align:center">有验证</td>
+</tr>
+<tr>
+<td style="text-align:center">Components - Table</td>
+<td style="text-align:center">功能有限</td>
+<td style="text-align:center">功能完善</td>
+<td style="text-align:center">功能完善</td>
+</tr>
+<tr>
+<td style="text-align:center">Functionality</td>
+<td style="text-align:center">骨感</td>
+<td style="text-align:center">丰满</td>
+<td style="text-align:center">丰满</td>
+</tr>
+</tbody>
+</table>
+<p>在组件丰富程度，以及文档及示例和版本迭代等多方面的权衡后，考虑到该项目并没有涉及或使用到其他框架，所以我们选择一款基于 Vue.js 开发的可能是目前<strong>最波大汁多（捂脸）的 UI 组件库 – iView。</strong></p>
+<h2 id="第三阶段：后台选择"><a href="#第三阶段：后台选择" class="headerlink" title="第三阶段：后台选择"></a>第三阶段：后台选择</h2><p><img src="/2017/03/25/前端技术选型/php.png" alt=""><br>因为本人对后台方面涉及不是很多，所以这里不过多比较，只是说下看法：</p>
+<blockquote>
+<p>Node.js 有一定的学习曲线，对新手来说不够理想，但是如果你是位喜欢该语言的靠谱的 JavaScript 程序员，Node.js 不会让你失望。她更新潮而且提供自己网页开发的体验，你不会思念 PHP。<br>但是不要贬低 PHP，PHP 依然有活力，你不该因为 Node.js 快一些，新一些或新潮一些就去紧跟 Node.js 潮流。PHP 易学而且依然支持专业的编程技巧，帮助无处不在而且开发简单。甚至死忠的 Node.js 开发者也不得不在简单网站和应用时考虑使用 PHP。</p>
+</blockquote>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p><strong>因为本文项目将使用 Node.js 进行后台开发，所以下面来介绍一下这个活好不粘人的平台（Node.js 是一个平台，而不是一门语言）。</strong></p>
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
+<p>Node.js是 Ryan Dahl（谷歌）在 2009 年 开发的一个事件驱动 I/O 服务端 JavaScript 环境，基于 Google 的 V8 引擎，V8 引擎执行 Javascript 的速度非常快，性能非常好。</p>
+</blockquote>
+<h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><blockquote>
+<p>它的目标是帮助程序员构建高度可伸缩的应用程序，编写能够处理数万条同时连接到一个（只有一个）物理机的连接代码。</p>
+</blockquote>
+<h4 id="特点（优势）"><a href="#特点（优势）" class="headerlink" title="特点（优势）"></a>特点（优势）</h4><ol>
+<li>它基于 JavaScrip 的运行环境</li>
+<li>依赖于 Chrome v8</li>
+<li>事件驱动</li>
+<li>非阻塞 IO</li>
+<li>轻量级，可伸缩，便于实时数据的交互</li>
+<li>单线程，单进程</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>不适合CPU密集的应用</li>
+<li>只支持单核</li>
+<li>可靠性低,一旦代码某个环节崩溃，会使整个项目崩溃<blockquote>
+<p>原因：单线程，单进程</p>
+</blockquote>
+</li>
+<li>开源组件库质量参差不齐，更新快，向下不兼容</li>
+<li>Debug 不方便，错误没有 stack trace</li>
+<li>单线程，单进程</li>
+</ol>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<li>实时应用：如在线聊天，实时通知推送等等（如 socket.io ）</li>
+<li>分布式应用：通过高效的并行I/O使用已有的数据</li>
+<li>工具类应用：海量的工具，小到前端压缩部署（如 grunt ），大到桌面图形界面应用程序</li>
+<li>游戏类应用：游戏领域对实时和并发有很高的要求（如网易的 pomelo 框架）</li>
+<li>利用稳定接口提升 Web 渲染能力</li>
+<li>前后端编程语言环境统一：前端开发人员可以非常快速地切入到服务器端的开发（如著名的纯 Javascript 全栈式 MEAN 架构）</li>
+</ul>
+<p>从上面列举的场景不难看出<strong>她活很好，但是毕竟她还很年轻</strong> ，所以在 CPU 使用率较重、IO 使用率较轻的应用——如视频编码、人工智能等，Node.js 的优势无法发挥简单 Web 应用——此类应用的特点是，流量低、物理架构简单，Node.js 无法提供像 Ruby 的 Rails 或者 Python 的 Django 这样强大的框架 NoSQL + Node.js。如果仅仅是为了追求时髦，且自己对这两门技术还未深入（深度，很重要！）理解的情况下，不要冒险将业务系统搭建在这两个漂亮的名词上，建议使用 MySQL 之类的传统数据库。</p>
+<h4 id="基于-Node-js-的-Web-框架"><a href="#基于-Node-js-的-Web-框架" class="headerlink" title="基于 Node.js 的 Web 框架"></a>基于 Node.js 的 Web 框架</h4><p><strong>Express 框架：</strong><br>时间：</p>
+<blockquote>
+<p>2009年6月26日，TJ Holowaychuk 提交了 Express 的第一次 commit，在2010年1月2日，Express 0.0.1版本正式发布</p>
+</blockquote>
+<p>介绍：</p>
+<blockquote>
+<p>Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，它提供一系列强大的特性，帮助你创建各种 Web 和移动设备应用</p>
+</blockquote>
+<p>性能：</p>
+<blockquote>
+<p>Express 不对 Node.js 已有的特性进行二次抽象，只是在它之上扩展了 Web 应用所需的基本功能</p>
+</blockquote>
+<p>优点：</p>
+<blockquote>
+<p>历史更久，文档更完整，资料更多，深入人心</p>
+</blockquote>
+<p>缺点：</p>
+<blockquote>
+<p>Express 是基于 callback 来组合业务逻辑。Callback 有两大硬伤，一是不可组合，二是异常不可捕获。Express 的中间件模式虽然在一定程度上解决这两个问题，但没法彻底解决。</p>
+</blockquote>
+<p>升级后的 Express 4.x：</p>
+<blockquote>
+<p>性能：http 回发反应时间缩短了 20%，内存占用减少了 10%，去掉了对 connect 中间件的捆绑,增强的路由系统</p>
+</blockquote>
+<p><strong>Mongoose 框架</strong><br>Mongoose Web Server 是一款易于使用的 Web 服务器，它可以嵌入到其它应用程序中，为其提供 Web 接口，可以链接 Node.js 也可以链接 MongoDb。并且有很多优点：</p>
+<ol>
+<li>跨平台，支持 Windows、OS X 和 Linux</li>
+<li>支持 CGI, SSL, SSI, Digest (MD5) 认证，WebSocket 和 WebDAV</li>
+<li>支持断点续传和 URL 重写</li>
+<li>基于 IP 的 ACL，支持 Windows 服务，支持 GET, POST, HEAD, PUT, DELETE 方法</li>
+<li>Excluding files from serving by URI pattern</li>
+<li>下载速度限制，基于客户端子网和 URI 模式</li>
+<li>体积小，可执行文件只有 40k 左右</li>
+<li>可嵌入式，提供简单的 API (mongoose.h)。只需一个源码文件 mongoose.c</li>
+<li>嵌入式</li>
+<li>提供 Python 和 C# 版本</li>
+<li>采用 MIT 授权协议</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>Node.js 会拥有大量的客人，但其未来发展也存在瓶颈（毕竟精力有限），而且适用领域有局限性。</p>
+<h2 id="第四阶段：数据库选择"><a href="#第四阶段：数据库选择" class="headerlink" title="第四阶段：数据库选择"></a>第四阶段：数据库选择</h2><p><img src="/2017/03/25/前端技术选型/mongo.jpg" alt=""><br>在选择完前端框架，UI 组件，以及后台平台后终于到了本文项目的最后一个阶段，首先我们先选择几个<strong>数据库届的头牌</strong>进行横向比较：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">MongoDB</th>
+<th style="text-align:center">MySQL</th>
+<th style="text-align:center">Oracle</th>
+<th style="text-align:center">SQL Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">开源</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">需要购买（贵）</td>
+<td style="text-align:center">需要购买（性价比高）</td>
+</tr>
+<tr>
+<td style="text-align:center">类型</td>
+<td style="text-align:center">非关系型</td>
+<td style="text-align:center">关系型</td>
+<td style="text-align:center">关系型</td>
+<td style="text-align:center">关系型</td>
+</tr>
+<tr>
+<td style="text-align:center">读写</td>
+<td style="text-align:center">MongoDB 读写速度比 MySQL 有明显的优势，MongoDB 读写速度大约 2.5w 次每秒</td>
+<td style="text-align:center">对于海量数据，MySQL 的读写速度会有一点瓶颈</td>
+<td style="text-align:center">高效率，可靠性好，适应量读写的数据库</td>
+<td style="text-align:center">没有前三种好</td>
+</tr>
+<tr>
+<td style="text-align:center">创建表</td>
+<td style="text-align:center">MongoDB 不需单独创建表，直接<code>use</code>就可以，插入数据时也只需要直接插入</td>
+<td style="text-align:center">需要用<code>create</code>命令创建表，创建，删除，插入都需要用 SQL 命令</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">事务处理</td>
+<td style="text-align:center">原子性，一致性，隔离型，持久性</td>
+<td style="text-align:center">不支持事务的处理</td>
+<td style="text-align:center">支持多用户，大事务的事务处理，数据安全性，完整性控制</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">空间</td>
+<td style="text-align:center">占用空间大</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">占用空间大</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">工具</td>
+<td style="text-align:center">新，没有成熟的工具维护</td>
+<td style="text-align:center">维护工具多，关系型数据库存在已久（调试，管理，优化简单）</td>
+<td style="text-align:center">有成熟的工具</td>
+<td style="text-align:center">有成熟的工具</td>
+</tr>
+<tr>
+<td style="text-align:center">扩展性</td>
+<td style="text-align:center">扩展性较好</td>
+<td style="text-align:center">有 join 这样的多表查询机制的限制导致扩展艰难</td>
+<td style="text-align:center">只能运行在微软的 Windows 平台，当用户连接多事性能会很差，并且不够稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">学习成本</td>
+<td style="text-align:center">不支持 SQL 标准，之前项目中用到过 MongoDB ,具有实战经验</td>
+<td style="text-align:center">有 SQL 基础</td>
+<td style="text-align:center">学习成本高，没有人用过，支持 Java</td>
+<td style="text-align:center">支持 SQL 标准</td>
+</tr>
+<tr>
+<td style="text-align:center">数据量</td>
+<td style="text-align:center">对于千万级数据量来说是OK的</td>
+<td style="text-align:center">可以处理拥有千万级的大型数据</td>
+<td style="text-align:center">支持亿级数据量</td>
+<td style="text-align:center">支持千万级数据量</td>
+</tr>
+<tr>
+<td style="text-align:center">分布式数据处理</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">支持的语言</td>
+<td style="text-align:center">支持 Node.js, PHP, Pyhon, C++</td>
+<td style="text-align:center">支持 PHP</td>
+<td style="text-align:center">支持 Java</td>
+<td style="text-align:center">支持 .Net</td>
+</tr>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">使用方便</td>
+<td style="text-align:center">使用与所有平台</td>
+<td style="text-align:center">可用性强，可扩展性强，数据安全性强，稳定性强</td>
+<td style="text-align:center">图形户的用户界面，操作更直观，简单</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;基于以上信息，如果从经济利益上出发考虑，Oracle 和 SQLServer 两款都属于收费型，所使用的后台语言也较难，不利于开发，而 MongoDB 和 MySQL 都属于开源免费的。从功能和存储量综合来考虑，Oracle 功能更加完善，支持多用户、大事务量的事务处理，安全性也更好，然而成本高，需要 Java 支持。其次是 SQL Server，性价比较高，但是开放性较差，只能在 Windows 平台运行，性能也不够稳定。MongoDB 不支持事务，但是使用方便，存储也方便，支持动态查询等，也有过实践经验。最后 MySQL，功能不是很健全，但是能处理大型数据。所以<strong>本文项目将会选择 MongoDB 进行数据支持</strong>。</p>
+<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p><br></p>
+<blockquote>
+<p>本文项目将使用 Vue.js + iView + Node.js + MongoDB 进行开发。</p>
+</blockquote>
+<p>&emsp;&emsp;有太多的选择，就是一件麻烦的事；没有选择时，就是一件更麻烦的事；有唯一的选择时，事情就会变得超级简单。但是技术选型也是没有银弹的——没有一个框架能解决所有的问题。为了更好的考量不同的因素：<br><img src="/2017/03/25/前端技术选型/factor.jpg" alt=""></p>
+<p>并且需要列出重要的象限，如开发效率、团队喜好等等。并依此来决定，哪个框架更适合当前的团队和项目。<br><img src="/2017/03/25/前端技术选型/rule.jpg" alt=""><br>总之，没有任何一项技术可以适用在所有场景，所以不同场景下的技术没有可比性。没有银弹和最好的语言和框架。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2017/03/25/前端技术选型/cover.jpeg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&amp;emsp;&amp;emsp;近些年来 JavaScript 生态圈风起云涌，涌现出大量的工具、类库和框架，极大推动了前端开发的发展。然而也有许多新技术并不成熟，随着使用暴露出很多问题；大部分前端工具框架的生命周期比较短暂，很快被更新的技术所取代。在这种背景下，如何在项目之初做出正确选型，在技术的生产力和潜在风险间做出平衡；如何让避免项目长期被过时的技术栈绑定，不断保持更新，享受新技术所带来的技术红利。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://www.carsonchen.online/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://www.carsonchen.online/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序开发总结</title>
+    <link href="http://www.carsonchen.online/2017/03/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.carsonchen.online/2017/03/24/微信小程序开发总结/</id>
+    <published>2017-03-24T01:54:21.000Z</published>
+    <updated>2017-03-24T01:54:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2017/03/24/微信小程序开发总结/wechat.jpg" alt=""></p>
+<h1 id="微信小程序的价值"><a href="#微信小程序的价值" class="headerlink" title="微信小程序的价值"></a>微信小程序的价值</h1><p>&emsp;&emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。<br><a id="more"></a></p>
+<ol>
+<li><p><strong>小程序是改善移动端用户体验的一次机会</strong></p>
+<p> 现在用户在移动端的浏览器打开比如滴滴打车这些 Web App，大概需要 3-5 秒的时间才能够看到 Web App 的界面。技术层面是因为 WebView 的加载过程，需要从服务器端拉取数据，会有一定的白屏等待时间。<br><br> <strong>而基于微信小程序所提供的本地数据缓存接口，开发者者可以预先把小程序里会用到的图片和资源文件缓存在微信端，当用户在微信打开小程序的时候，就可以实现“秒开”。</strong>当然目前小程序的文件大小有不超过过1M的限制,所以开发者们也需要好好考虑如何把自己的小程序实现成一个小而美的产品。</p>
+</li>
+<li><p><strong>小程序不能做什么？不适合做什么？</strong></p>
+<p> 目前“小程序”的接口，暂时不支持直播。运营规则层面不允许开发游戏、小测试类的小程序。小程序也不太适合做单纯展示型的应用，展示类的场景订阅号已经支持的不错了，从另一个技术层面我们也能看到一些线索，小程序并不是用来给开发者做单纯展示类的应用。</p>
+</li>
+<li><p><strong>小程序适合做什么？</strong></p>
+<p> <strong>小程序比较适合做一些“用完即走”的功能和场景，比如当某些轻度用户想到用某个功能又不愿意安装 APP 的时候，小程序就能帮你留住这 20% 的轻度用户。</strong></p>
+</li>
+<li><p><strong>更多接口，意味着更多可能性</strong></p>
+<p> 从移动开发技术栈层面来看，小程序以 JSSDK 方式开放的一些系统级接口，比 H5 和 React-Native 更多。比如一些网络设备状况、重力感应、社交、支付等接口。</p>
+<p> 这也意味开发者用腾讯云和小程序给到的能力，让小程序的开发变得更加简单，给用户提供一些更小而美的应用、实现“用完即走”的使用场景。</p>
+</li>
+</ol>
+<p>&emsp;&emsp;微信小程序出来，程序员的圈子里不少前端程序员都很兴奋，认为前端的春天来了。<strong>小程序最吸引前端，但小程序开发不是 H5 开发</strong></p>
+<ul>
+<li>H5 是基于 DOM（文档对象模型）的，但小程序不是</li>
+<li>基于包开发，开发和发布流程是不一样的</li>
+<li>小程序上传和下载文件的时候，只能拿到 ID，不能拿到内容</li>
+<li>Web 开发的 session 管理，服务器帮你实现了，不需要你关注</li>
+<li>小程序虽然有域名（用于通讯和验证），但是没有 Cookie</li>
+</ul>
+<h1 id="思维转变"><a href="#思维转变" class="headerlink" title="思维转变"></a>思维转变</h1><ul>
+<li>微信小程序没有 HTML 的常用标签，而是类似 React 的微信自定义组件，比如 view、text、map 等</li>
+<li>没有 window 变量，但微信提供了 wx 全局方法集</li>
+<li>没有 a 标签链接，不可嵌套 iframe</li>
+<li>事件绑定和条件渲染类似 Angular，全部写在 WXML 中</li>
+<li>数据绑定采用 Mustache 双大括号语法</li>
+<li>无法操作 DOM，通过改变 page data（类似 React 的 state）来改变视图展现</li>
+</ul>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p><br><strong>可以把小程序理解成一个单页面的 H5 网页，所有元素的加载都是一次性的，这也就引来了生命周期的概念：</strong></p>
+<p><img src="/2017/03/24/微信小程序开发总结/lifecycle01.png" alt=""><br>首次打开，小程序初始化</p>
+<ul>
+<li>小程序初始化完成后，触发<code>onShow</code>事件</li>
+<li>小程序被切换到后台（熄屏，切换 APP 等），触发<code>onHide</code></li>
+<li>小程序从后台切换到前台，再次触发<code>onShow</code></li>
+<li>小程序出错，触发<code>onError</code></li>
+</ul>
+<p><strong>每个页面也有自己的生命周期：</strong></p>
+<p><img src="/2017/03/24/微信小程序开发总结/lifecycle02.png" alt=""></p>
+<blockquote>
+<p>注意：在微信6.5.3版本中，部分Android机触发不了onLoad事件，可以用onReady替代。</p>
+</blockquote>
+<h1 id="数据中心"><a href="#数据中心" class="headerlink" title="数据中心"></a>数据中心</h1><p><strong>根目录的app.js很有用，根目录的app.js很有用，根目录的app.js很有用</strong></p>
+<p>因为在它内部注册的变量或方法，都是可以被所有页面获取到，所以利用它也可以处理上面所述的跨页面事件触发问题。而且可以注册<code>globalData</code>供所有页面取用，例如可以把<code>systemInfo</code>直接注册到<code>globalData</code>中，这样就不用在每个页面都获取一遍：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const systemInfo = wx.getSystemInfoSync()</div><div class="line">App(&#123;</div><div class="line">  globalData: &#123;</div><div class="line">    systemInfo</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>在页面中获取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Page A</div><div class="line"></div><div class="line">const &#123;</div><div class="line">  systemInfo</div><div class="line">&#125; = getApp().globalData</div></pre></td></tr></table></figure></p>
+<h1 id="参数传值"><a href="#参数传值" class="headerlink" title="参数传值"></a>参数传值</h1><h2 id="data-id"><a href="#data-id" class="headerlink" title="data-id"></a>data-id</h2><p>我们可以给 HTML 元素添加<code>data-*</code>属性来传递我们需要的值,使用方法说明：</p>
+<ol>
+<li><p>设置 data-id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;view class=&quot;block&quot; bindtap=&quot;playTap&quot; data-id=&quot;&#123;&#123;modle.id&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值 + 传值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">playTap:function(e) &#123;</div><div class="line">       const dataset = e.currentTarget.dataset;</div><div class="line">       wx.navigateTo(&#123;</div><div class="line">         url: &apos;../play/index?id=&apos;+ dataset.id</div><div class="line">       &#125;)</div><div class="line">       console.log(dataset.id);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">onLoad:function (param) &#123;</div><div class="line">    //页面初始化</div><div class="line">        this.setData(&#123;</div><div class="line">            currentId:param.id</div><div class="line">        &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p><code>data-</code> 注意事项：<code>data-</code> 名称不能有大写字母, <code>data-*</code> 属性中不可以存放对象</p>
+</blockquote>
+<h2 id="设置-id-的方法标识来传值"><a href="#设置-id-的方法标识来传值" class="headerlink" title="设置 id 的方法标识来传值"></a>设置 id 的方法标识来传值</h2><p>使用方法说明:</p>
+<ol>
+<li><p>设置 id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;view bindtap=“playTap&quot; id=&quot;&#123;&#123;modle.id&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值</p>
+<blockquote>
+<p>通过<code>e.currentTarget.id</code>获取设置的<code>id</code>的值,然后通过设置全局对象的方式来传递数值</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="在navigator中添加参数传值"><a href="#在navigator中添加参数传值" class="headerlink" title="在navigator中添加参数传值"></a>在navigator中添加参数传值</h2><p>使用方法说明：</p>
+<ol>
+<li><p>传值:在<code>navigator</code>的属性<code>url</code>后拼接<code>?id</code>(参数名字)=要传递的值 (如果多个参数用<code>&amp;</code>分开 <code>&amp;name=value&amp;...</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;navigator url=&quot;../my/my?id=&#123;&#123;item.id&#125;&#125;&quot; wx:for=&quot;&#123;&#123;modles&#125;&#125;&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>取值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">onLoad (params)&#123;</div><div class="line">    app.fetch(API.detail + params.id,(err,data) =&gt; &#123; &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="数据请求封装"><a href="#数据请求封装" class="headerlink" title="数据请求封装"></a>数据请求封装</h1><ol>
+<li><p>将所有的接口放在统一的 js 文件中并导出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const api = &#123;</div><div class="line">    interface1: &apos;https://...&apos;,</div><div class="line">    interface2: &apos;https://...&apos;,</div><div class="line">    interface3: &apos;https://...&apos;,</div><div class="line">    .....</div><div class="line">&#125;</div><div class="line">module.exports = api;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在 app.js 中创建封装请求数据的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">fetch(url, data, callback) &#123;</div><div class="line">      wx.request(&#123;</div><div class="line">          url,</div><div class="line">          data: data,</div><div class="line">          header: &#123;</div><div class="line">              &apos;Content-Type&apos;: &apos;application/json&apos;</div><div class="line">          &#125;,</div><div class="line">          success(res) &#123;</div><div class="line">              callback(null, res.data);</div><div class="line">          &#125;,</div><div class="line">          error(err) &#123;</div><div class="line">              callback(err);</div><div class="line">          &#125;</div><div class="line">      &#125;)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在子页面中调用封装的方法请求数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import API from &quot;../../api/api.js&quot;;</div><div class="line">const app = getApp();</div><div class="line">const conf = &#123;</div><div class="line">    data:&#123;</div><div class="line">        title:&apos;正在拼命加载中...&apos;,</div><div class="line">        loadding:true</div><div class="line">    &#125;,</div><div class="line">    onLoad ()&#123;</div><div class="line">        app.fetch(API.interface1,&#123;&#125;,(err,data) =&gt; &#123;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="使用模板（模板真滴是个好东西）"><a href="#使用模板（模板真滴是个好东西）" class="headerlink" title="使用模板（模板真滴是个好东西）"></a>使用模板（模板真滴是个好东西）</h1><ol>
+<li><p>定义模板: <code>name</code>设置模板的名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 定义模板</div><div class="line">&lt;template name=&quot;homecell&quot;&gt;</div><div class="line">     &lt;view class=&quot;item&quot;&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line"> &lt;/template&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用模板首先引入模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;import src=&quot;../../commonXml/homecell.wxml&quot; /&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后使用模板<code>is</code>后写模板的<code>name</code>. 通过<code>data</code>来传递需要是数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;template is=&quot;homecell&quot; data=&quot;&#123;&#123;item&#125;&#125;&quot;&gt;&lt;/template&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Array-比较好用的属性和方法"><a href="#Array-比较好用的属性和方法" class="headerlink" title="Array 比较好用的属性和方法"></a>Array 比较好用的属性和方法</h1><ul>
+<li><code>Array.isArray()</code> 方法用来判断某个值是否为 <code>Array</code> 。如果是，则返回 <code>true</code>，否则返回 <code>false</code>。</li>
+<li><code>concat()</code> 方法将传入的数组或非数组值与原数组合并,组成一个新的数组并返回。</li>
+<li><code>forEach()</code> 方法对数组的每个元素执行一次提供的函数(回调函数)。</li>
+<li><code>join()</code> 方法将数组中的所有元素连接成一个字符串。</li>
+<li><code>keys()</code> 方法返回一个数组索引的迭代器。</li>
+<li><code>map()</code> 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组</li>
+<li><code>pop()</code> 方法删除一个数组中的最后的一个元素，并且返回这个元素。</li>
+<li><code>push()</code> 方法添加一个或多个元素到数组的末尾，并返回数组新的长度（<code>length</code> 属性值）。</li>
+<li><code>toString()</code> 返回一个字符串，表示指定的数组及其元素。</li>
+</ul>
+<h1 id="对象Object常用方法"><a href="#对象Object常用方法" class="headerlink" title="对象Object常用方法"></a>对象Object常用方法</h1><ol>
+<li><p>初始化方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj = [];</div><div class="line">var obj = new obj();</div><div class="line">var obj = Object.create(null);</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加元素的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dic[“key”] = “value”;</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除<code>key</code>的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete dic[“key”];</div></pre></td></tr></table></figure>
+</li>
+<li><p>清空词所有条目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dic.clear();</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">delete dic;</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有属性的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object.keys(obj);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>对象的所有键名都是字符串，所以加不加引号都可以,如果键名是数值，会被自动转为字符串但是，如果键名不符合标识名的条件（比如第一个字符为数字，或者含有空格或运算符），也不是数字，则必须加上引号，否则会报错</p>
+</blockquote>
+<ol>
+<li>读取属性<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj.name || obj[’name&apos;]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注意: 数值键名不能使用点运算符（因为会被当成小数点），只能使用方括号运算符。</p>
+</blockquote>
+<ol>
+<li><p>检查变量是否声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if(obj.name) || if(obj[’name&apos;])</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>in</code> 运算符用于检查对象是否包含某个属性,如果包含返回<code>true</code>, 否则返回<code>false</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if ( ‘x’ in obj) &#123;return 1&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>for … in</code> 循环用来遍历一个对象的全部属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for(var i in obj) &#123;</div><div class="line">    console.log(obj);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>with</code> 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">with(obj) &#123;</div><div class="line">    name1 = 1;</div><div class="line">    name2 = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 等同于</div><div class="line">obj.name1 = 1;</div><div class="line">obj.name2 = 2;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>作用: 操作同一个对象的多个属性时,提供一些书写的方便</p>
+</blockquote>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.zhihu.com/question/50875544/answer/133070413" target="_blank" rel="external">知乎：贺嘉</a></li>
+<li><a href="https://segmentfault.com/a/1190000008056208" target="_blank" rel="external">segmentFault：binnng</a></li>
+<li><a href="http://www.wxapp-union.com/forum.php?mod=viewthread&amp;tid=2045&amp;extra=page=1" target="_blank" rel="external">微信小程序联盟：ntt123456</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2017/03/24/微信小程序开发总结/wechat.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;微信小程序的价值&quot;&gt;&lt;a href=&quot;#微信小程序的价值&quot; class=&quot;headerlink&quot; title=&quot;微信小程序的价值&quot;&gt;&lt;/a&gt;微信小程序的价值&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp;微信小程序是一种介于原生 APP、和 Web APP 的 Hybrid。通过微信进行加载，实现类似原生 APP 的流畅。相对原生APP来说，小程序更加轻量、更新实时、跨平台；相对 Web APP 来说，小程序资源离线，体验更流畅。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="微信小程序" scheme="http://www.carsonchen.online/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+      <category term="微信小程序" scheme="http://www.carsonchen.online/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6中常用特性</title>
+    <link href="http://www.carsonchen.online/2017/03/22/ES6%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/"/>
+    <id>http://www.carsonchen.online/2017/03/22/ES6中常用特性/</id>
+    <published>2017-03-22T06:53:34.000Z</published>
+    <updated>2017-03-24T07:27:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2017/03/22/ES6中常用特性/es6.jpg" alt=""></p>
+<h1 id="ECMAScript-6"><a href="#ECMAScript-6" class="headerlink" title="ECMAScript 6"></a>ECMAScript 6</h1><p>&emsp;&emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。<br><a id="more"></a></p>
+<h2 id="什么是-ECMAScrpit"><a href="#什么是-ECMAScrpit" class="headerlink" title="什么是 ECMAScrpit"></a>什么是 ECMAScrpit</h2><p>&emsp;&emsp;JavaScript 的语言标准是由 ECMA (类似 W3C 的标准化组织)制定，并命名为 ECMAscript，除其他事项外，ECMAscript 还定义了：</p>
+<ul>
+<li>语法规则 - 解析规则、关键字、声明、操作符等</li>
+<li>变量类型 - 布尔型、字符串、对象、数字等</li>
+<li>原型和继承机制</li>
+<li>包含内置对象和方法的标准库 - JSON、Math、数组方法、遍历方法等</li>
+</ul>
+<p>&emsp;&emsp;ECMAScript 标准不定义 HTML 或 CSS 的相关功能，也不定义类似 DOM（文档对象模型）的 Web API，这些都在独立的标准中进行定义。ECMAScript 涵盖了各种环境中 JS 的使用场景，无论是浏览器环境还是类似 NodeJS 的非浏览器环境。</p>
+<h2 id="JavaScript的历史"><a href="#JavaScript的历史" class="headerlink" title="JavaScript的历史"></a>JavaScript的历史</h2><p>JavaScript 发展时间轴：</p>
+<ol>
+<li>1995：JavaScript 诞生，它的初始名叫 LiveScript</li>
+<li>1997：ECMAScript 标准确立</li>
+<li>1999：ES3 出现，与此同时 IE5 风靡一时</li>
+<li>2000–2005：XMLHttpRequest 又名 AJAX，在 Outlook Web Access (2000)、Oddpost (2002)，Gmail (2004)和 Google Maps (2005)大受重用</li>
+<li>2009：ES5 出现，例如 forEach，Object.keys，Object.create 和 JSON 标准</li>
+<li>2015：ES6/ECMAScript2015 出现</li>
+</ol>
+<hr>
+<h1 id="ES6-常用特性"><a href="#ES6-常用特性" class="headerlink" title="ES6 常用特性"></a>ES6 常用特性</h1><p>所提到的常用特性十分主观并且带有偏见，其他未提到的特性并不是因为没有作用，而是我了解的不多</p>
+<h2 id="块级作用域及-let-const-命令"><a href="#块级作用域及-let-const-命令" class="headerlink" title="块级作用域及 let/const 命令"></a>块级作用域及 let/const 命令</h2><p>&emsp;&emsp;在 ES6 中，声明变量不再用<code>var</code>而用<code>let</code>/<code>const</code>。<code>var</code>的问题在于它会泄露变量到其他代码块中，而<code>let</code>可以让你把变量作用域限制在当前块里。我们用<code>{}</code>来定义块，但是在 ES5 中这些花括号起不到任何作用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  let n = 1;</div><div class="line">  if (true) &#123;</div><div class="line">    let n = 2;</div><div class="line">  &#125;</div><div class="line">  console.log(n); // 2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>const</code>声明一个只读的常量。一旦声明，常量的值就不能改变。同样<code>const</code>的作用域与<code>let</code>命令相同，只在声明所在的块级作用域内有效，<code>const</code>命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">  const A = 3;</div><div class="line">  A = 4; // 报错</div><div class="line">&#125;</div><div class="line">console.log(A) // A is not defined</div></pre></td></tr></table></figure></p>
+<p><code>const</code>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，<code>const</code>只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const acers = [];</div><div class="line">acers.push(&apos;Carson&apos;); // 可执行</div><div class="line">acers = [&apos;Chen&apos;];    // 报错</div></pre></td></tr></table></figure></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p><code>=&gt;</code>不只是关键字<code>function</code>的简写，它还带来了其它好处。以前我们使用闭包，<code>this</code>总是预期之外地产生改变，而箭头函数的迷人之处在于，现在你的<code>this</code>可以按照你的预期使用了，身处箭头函数里面，<code>this</code>还是原来的<code>this</code>。有经验的 JavaScript 开发者都熟悉诸如<code>var _this = this</code>;或<code>var that = this</code>这种引用外围<code>this</code>的模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var _this = this;</div><div class="line">$(&apos;.btn&apos;).click(function(event)&#123;</div><div class="line">  _this.sendData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>但在 ES6 中借助<code>=&gt;</code>，就不需要这种模式了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;.btn&apos;).click((event) =&gt;&#123;</div><div class="line">  this.sendData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这是 ES5 中利用 messages 数组创建一个数组的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map(function (value) &#123;</div><div class="line">  return &apos;ID is &apos; + value // 显式返回</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>在ES6中会变成这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map(value =&gt; `ID is $&#123;value&#125;`) // 隐式返回</div></pre></td></tr></table></figure></p>
+<p>请注意，这里用了字符串模板。<br><br>在箭头函数中，对于单个参数，括号<code>()</code>是可选的，但当你超过一个参数的时候你就需要他们。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var ids = [&apos;007&apos;,&apos;110&apos;];</div><div class="line">var messages = ids.map((value, index) =&gt; `ID of $&#123;index&#125; element is $&#123;value&#125; `) // 隐式返回</div></pre></td></tr></table></figure></p>
+<h2 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h2><p>以前我们经常要检查一个变量是否已定义，没定义就赋一个默认值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var handsome = function(name, tall, age)&#123;</div><div class="line">    var name = name || &apos;Carson&apos;;</div><div class="line">    var tall = tall || 178;</div><div class="line">    var age = age || 3;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样做一直都没什么问题，直到参数的值为<code>0</code>，因为<code>0</code>在 JavaScript 中算是<code>false</code>值，它会直接变成后面硬编码的值而不是<code>0</code>本身。当然了，谁要用<code>0</code>来传值啊（讽刺脸）？在 ES6 中，我们可以把这些默认值直接放在函数签名中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var handsome = function(name = &apos;Carson&apos;, tall = 178, age = 3)&#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="模板表达式"><a href="#模板表达式" class="headerlink" title="模板表达式"></a>模板表达式</h2><p>模版表达式在其他语言中一般是为了在模版字符串中输出变量，所以在 ES5 中，我们非得把字符串破开变成这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var handsome = &apos;My name is &apos; + name + &apos;, my height is&apos; + tall + &apos;cm.&apos;;</div><div class="line">var url = &apos;http://carsonchen.online/2017/&apos; + id;</div></pre></td></tr></table></figure></p>
+<p>幸运的是，在 ES6 中我们有了新语法，在反引号包裹的字符串中，使用<code>${NAME}</code>语法来表示模板字符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var handsome = `My name is $&#123;name&#125;, my height is $&#123;tall&#125; cm.`;</div><div class="line">var url = `http://carsonchen.online/2017/$&#123;id&#125;`;</div></pre></td></tr></table></figure></p>
+<h2 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h2><p>ES6 的多行字符串是一个非常实用的功能。在 ES5 中，我们不得不使用以下方法来表示多行字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var BBKing = &apos;念念不忘，\n&apos;</div><div class="line">            +&apos;必有回响。&apos;;</div></pre></td></tr></table></figure></p>
+<p>但是在 ES6 中，只要充分利用反引号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var BBKing = `念念不忘，</div><div class="line">            必有回响。`;</div></pre></td></tr></table></figure></p>
+<h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</p>
+<p>以前，为变量赋值，只能直接指定值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let a = 1;</div><div class="line">let b = 2;</div><div class="line">let c = 3;</div></pre></td></tr></table></figure></p>
+<p>ES6允许写成下面这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let [a, b, c] = [1, 2, 3];</div></pre></td></tr></table></figure></p>
+<p>上面代码表示，可以从数组中提取值，按照对应位置，对变量赋值。</p>
+<p>本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。下面是一些使用嵌套数组进行解构的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">let [a, [[b], c]] = [1, [[2], 3]];</div><div class="line">a // 1</div><div class="line">b // 2</div><div class="line">c // 3</div><div class="line"></div><div class="line">let [ , , third] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];</div><div class="line">third // &quot;c&quot;</div><div class="line"></div><div class="line">let [x, , y] = [1, 2, 3];</div><div class="line">x // 1</div><div class="line">y // 3</div><div class="line"></div><div class="line">let [head, ...tail] = [1, 2, 3, 4];</div><div class="line">head // 1</div><div class="line">tail // [2, 3, 4]</div><div class="line"></div><div class="line">let [a, b, c = &apos;y&apos;,...d] = [&apos;x&apos;];</div><div class="line">a // &quot;x&quot;</div><div class="line">b // undefined</div><div class="line">c // &quot;y&quot; 指定默认值</div><div class="line">d // []</div></pre></td></tr></table></figure></p>
+<p>如果解构不成功，变量的值就等于<code>undefined</code>。</p>
+<p>另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let [x, y] = [1, 2, 3];</div><div class="line">x // 1</div><div class="line">y // 2</div><div class="line"></div><div class="line">let [a, [b], d] = [1, [2, 3], 4];</div><div class="line">a // 1</div><div class="line">b // 2</div><div class="line">d // 4</div></pre></td></tr></table></figure></p>
+<p>上面两个例子，都属于不完全解构，但是可以成功。</p>
+<p>如果等号的右边不是数组，那么将会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 报错</div><div class="line">let [foo] = 1;</div><div class="line">let [foo] = false;</div><div class="line">let [foo] = NaN;</div><div class="line">let [foo] = undefined;</div><div class="line">let [foo] = null;</div><div class="line">let [foo] = &#123;&#125;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>解构不仅可以用于数组，还可以用于对象。</li>
+<li>字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。</li>
+<li>解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。</li>
+<li>解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于<code>undefined</code>和<code>null</code>无法转为对象，所以对它们进行解构赋值，都会报错。</li>
+<li>函数的参数也可以使用解构赋值。</li>
+</ul>
+<h2 id="Promise-对象"><a href="#Promise-对象" class="headerlink" title="Promise 对象"></a>Promise 对象</h2><p>&emsp;&emsp;Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了 Promise 对象。</p>
+<p>所谓 Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<h3 id="Promise-的特点"><a href="#Promise-的特点" class="headerlink" title="Promise 的特点"></a>Promise 的特点</h3><ol>
+<li>对象的状态不受外界影响。Promise 对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</li>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise 对象的状态改变，只有两种可能：从 Pending 变为 Resolved 和从 Pending 变为 Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。如果改变已经发生了，就算你再对 Promise 对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。<br>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</li>
+<li>Promise 也有一些缺点。首先，无法取消 Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。最后，当处于 Pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</li>
+</ol>
+<h3 id="Promise-的基本用法"><a href="#Promise-的基本用法" class="headerlink" title="Promise 的基本用法"></a>Promise 的基本用法</h3><p>我们来实现一个延迟异步执行，用 setTimeout 实现，并内嵌一些复杂逻辑在<code>setTimeout()</code>中的回调中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">setTimeout(function()&#123;</div><div class="line">  console.log(&apos;Carson&apos;)</div><div class="line">  setTimeout(function()&#123;</div><div class="line">    console.log(&apos;Chen&apos;)</div><div class="line">  &#125;, 1000)</div><div class="line">&#125;, 1000)</div></pre></td></tr></table></figure></p>
+<p>可以用 ES6 中的 Promise 重写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var wait = ()=&gt; new Promise((resolve, reject)=&gt; &#123;setTimeout(resolve, 1000)&#125;)</div><div class="line"></div><div class="line">wait()</div><div class="line">    .then(function() &#123;</div><div class="line">        console.log(&apos;Carson&apos;)</div><div class="line">        return wait()</div><div class="line">    &#125;)</div><div class="line">    .then(function() &#123;</div><div class="line">        console.log(&apos;Chen&apos;)</div><div class="line">    &#125;)</div><div class="line">    .catch(function(error)&#123;</div><div class="line">        console.log(&apos;错误&apos; + error)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<p><code>.catch</code>方法是<code>.then(null, rejection)</code>的别名，用于指定发生错误时的回调函数。</p>
+<p>下面是一个用 Promise 对象实现的 Ajax 操作的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var getJSON = function(url) &#123;</div><div class="line">  var promise = new Promise(function(resolve, reject)&#123;</div><div class="line">    var ajax = new XMLHttpRequest();</div><div class="line">    ajax.open(&quot;GET&quot;, url);</div><div class="line">    ajax.onreadystatechange = handler;</div><div class="line">    ajax.responseType = &quot;json&quot;;</div><div class="line">    ajax.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);</div><div class="line">    ajax.send();</div><div class="line"></div><div class="line">    function handler() &#123;</div><div class="line">      if (this.readyState !== 4) &#123;</div><div class="line">        return;</div><div class="line">      &#125;</div><div class="line">      if (this.status === 200) &#123;</div><div class="line">        resolve(this.response);</div><div class="line">      &#125; else &#123;</div><div class="line">        reject(new Error(this.statusText));</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  return promise;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">getJSON(&quot;/posts.json&quot;).then(function(json) &#123;</div><div class="line">  console.log(&apos;获取内容: &apos; + json);</div><div class="line">&#125;, function(error) &#123;</div><div class="line">  console.error(&apos;出错了&apos;, error);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>上面代码中，<code>getJSON</code> 是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个 Promise 对象。需要注意的是，在<code>getJSON</code>内部，<code>resolve</code>函数和<code>reject</code>函数调用时，都带有参数。</p>
+<p>如果调用<code>resolve</code>函数和<code>reject</code>函数时带有参数，那么它们的参数会被传递给回调函数。<code>reject</code>函数的参数通常是<code>Error</code>对象的实例，表示抛出的错误；<code>resolve</code>函数的参数除了正常的值以外，还可能是另一个 Promise 实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作。</p>
+<h2 id="类（Class）和对象"><a href="#类（Class）和对象" class="headerlink" title="类（Class）和对象"></a>类（Class）和对象</h2><p>有了 ES6，我们可以用“类”来替换“构造函数”。</p>
+<blockquote>
+<p>JavaScript中，每个对象都有一个原型，那是另外的一个对象。所有JavaScript对象从它们的原型对象中继承方法和属性。</p>
+</blockquote>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>在 ES5 中，我们进行面向对象编程时使用构造函数来创建对象，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var Person = (function () &#123;</div><div class="line">  function MyConstructor(name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  MyConstructor.prototype.speak = function speak() &#123;</div><div class="line">    console.log(this.name + &apos; is very very handsome.&apos;);</div><div class="line">  &#125;;</div><div class="line">  return MyConstructor;</div><div class="line">&#125;)();</div><div class="line">var carson = new Person(&apos;carson&apos;);</div><div class="line">carson.speak(); // carson is very very handsome.</div></pre></td></tr></table></figure></p>
+<p>在 ES6 中，我们有了些新语法，能够用更少的模式化代码和新的关键字来实现同样的功能，比如 class 和 constructor。同样，可以比较一下哪种方式更清晰：<code>constructor.prototype.speak = function()</code> vs <code>speak()</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor(name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  speak() &#123;</div><div class="line">    console.log(this.name + &apos; is very very handsome.&apos;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">const carson = new Person(&apos;carson&apos;);</div><div class="line">carson.speak(); // carson is very very handsome.</div></pre></td></tr></table></figure></p>
+<p>我们看到，两种方式（ES5/6）在幕后输出了同样的结果，用起来没有差别。所以尽量使用 class 语法而避免直接操作 prototype。这能够令代码更简洁易懂。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>使用<code>NAME extends PARENT_NAME</code>语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Chen extends Person &#123;</div><div class="line">  speak() &#123;</div><div class="line">    super.speak();</div><div class="line">    console.log(&apos;Mingjia &apos; + this.name);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">const chen = new Chen(&apos;Chen&apos;);</div><div class="line">chen.speak(); // Chen is very very handsome.</div><div class="line">// Mingjia Chen.</div></pre></td></tr></table></figure></p>
+<h2 id="for-…-of"><a href="#for-…-of" class="headerlink" title="for … of"></a>for … of</h2><p>我们经历过从<code>for</code>到<code>forEach</code>，然后到<code>for ... of</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// for</div><div class="line">var array = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;];</div><div class="line">for (var i = 0; i &lt; array.length; i++) &#123;</div><div class="line">  var element = array[i];</div><div class="line">  console.log(element);</div><div class="line">&#125;</div><div class="line">// forEach</div><div class="line">array.forEach(function (element) &#123;</div><div class="line">  console.log(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6 中的<code>for ... of</code>也是用来处理循环的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// for...of</div><div class="line">const array = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;];</div><div class="line">for (const element of array) &#123;</div><div class="line">    console.log(element);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来。其他语言都有这项功能，比如 Ruby 的 <code>require</code>、Python 的 <code>import</code>，甚至就连 CSS 都有 <code>@import</code>，但是 JavaScript 任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。</p>
+<p>在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ES6 模块的设计思想，是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// CommonJS模块</div><div class="line">let &#123; stat, exists, readFile &#125; = require(&apos;fs&apos;);</div><div class="line"></div><div class="line">// 等同于</div><div class="line">let _fs = require(&apos;fs&apos;);</div><div class="line">let stat = _fs.stat;</div><div class="line">let exists = _fs.exists;</div><div class="line">let readfile = _fs.readfile;</div></pre></td></tr></table></figure></p>
+<p>上面代码的实质是整体加载 fs 模块（即加载 fs 的所有方法），生成一个对象（_fs），然后再从这个对象上面读取3个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。</p>
+<p>ES6 模块不是对象，而是通过<code>export</code>命令显式指定输出的代码，再通过<code>import</code>命令输入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// ES6模块</div><div class="line">import &#123; stat, exists, readFile &#125; from &apos;fs&apos;;</div></pre></td></tr></table></figure></p>
+<p>上面代码的实质是从 fs 模块加载3个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载，效率要比 CommonJS 模块的加载方式高。当然，这也导致了没法引用 ES6 模块本身，因为它不是对象。</p>
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>ES6 的模块自动采用严格模式，不管你有没有在模块头部加上<code>&quot;use strict&quot;</code>;。</p>
+<p>严格模式主要有以下限制：</p>
+<ul>
+<li>变量必须声明后再使用</li>
+<li>函数的参数不能有同名属性，否则报错</li>
+<li>不能使用<code>with</code>语句</li>
+<li>不能对只读属性赋值，否则报错</li>
+<li>不能使用前缀0表示八进制数，否则报错</li>
+<li>不能删除不可删除的属性，否则报错</li>
+<li>不能删除变量<code>delete prop</code>，会报错，只能删除属性<code>delete global[prop]</code></li>
+<li><code>eval</code>不会在它的外层作用域引入变量</li>
+<li><code>eval</code>和<code>arguments</code>不能被重新赋值</li>
+<li><code>arguments</code>不会自动反映函数参数的变化</li>
+<li>不能使用<code>arguments.callee</code></li>
+<li>不能使用<code>arguments.caller</code></li>
+<li>禁止<code>this</code>指向全局对象</li>
+<li>不能使用<code>fn.calle</code>r和<code>fn.arguments</code>获取函数调用的堆栈</li>
+<li>增加了保留字（比如<code>protected</code>、<code>static</code>和<code>interface</code>）<br>其中，尤其需要注意<code>this</code>的限制。ES6 模块之中，顶层的<code>this</code>指向<code>undefined</code>，即不应该在顶层代码使用<code>this</code>。</li>
+</ul>
+<h3 id="export-命令"><a href="#export-命令" class="headerlink" title="export 命令"></a>export 命令</h3><p>模块功能主要由两个命令构成：<code>export</code>和<code>import</code>。<code>export</code>命令用于规定模块的对外接口，<code>import</code>命令用于输入其他模块提供的功能。</p>
+<p>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用<code>export</code>关键字输出该变量。下面是一个 JS 文件，里面使用<code>export</code>命令输出变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// profile.js</div><div class="line">export var firstName = &apos;Carson&apos;;</div><div class="line">export var lastName = &apos;Chen&apos;;</div><div class="line">export var year = 1996;</div></pre></td></tr></table></figure></p>
+<p>上面代码是<code>profile.js</code>文件，保存了用户信息。ES6 将其视为一个模块，里面用<code>export</code>命令对外部输出了三个变量。</p>
+<p><code>export</code>的写法，除了像上面这样，还有另外一种。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// profile.js</div><div class="line">var firstName = &apos;Carson&apos;;</div><div class="line">var lastName = &apos;Chen&apos;;</div><div class="line">var years = 1996;</div><div class="line"></div><div class="line">export &#123;firstName, lastName, year as year&#125;;</div></pre></td></tr></table></figure></p>
+<p>上面代码在<code>export</code>命令后面，使用大括号指定所要输出的一组变量。它与前一种写法（直接放置在<code>var</code>语句前）是等价的，但是应该优先考虑使用这种写法。因为这样就可以在脚本尾部，一眼看清楚输出了哪些变量。</p>
+<h3 id="import-命令"><a href="#import-命令" class="headerlink" title="import 命令"></a>import 命令</h3><p>使用<code>export</code>命令定义了模块的对外接口以后，其他 JS 文件就可以通过<code>import</code>命令加载这个模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// main.js</div><div class="line">import &#123;firstName, lastName, year as years&#125; from &apos;./profile&apos;;</div><div class="line"></div><div class="line">function setName(element) &#123;</div><div class="line">  element.textContent = firstName + &apos; &apos; + lastName + &apos;age:&apos; + years;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码的<code>import</code>命令，用于加载<code>profile.js</code>文件，并从中输入变量。<code>import</code>命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（<code>profile.js</code>）对外接口的名称相同。</p>
+<h3 id="模块的整体加载"><a href="#模块的整体加载" class="headerlink" title="模块的整体加载"></a>模块的整体加载</h3><p>除了指定加载某个输出值，还可以使用整体加载，即用星号（*）指定一个对象，所有输出值都加载在这个对象上面。</p>
+<p>下面是一个<code>circle.js</code>文件，它输出两个方法<code>area</code>和<code>circumference</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// circle.js</div><div class="line"></div><div class="line">export function area(radius) &#123;</div><div class="line">  return Math.PI * radius * radius;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export function circumference(radius) &#123;</div><div class="line">  return 2 * Math.PI * radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>整体加载的写法如下；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import * as circle from &apos;./circle&apos;;</div><div class="line"></div><div class="line">console.log(&apos;圆面积：&apos; + circle.area(4));</div><div class="line">console.log(&apos;圆周长：&apos; + circle.circumference(14));</div></pre></td></tr></table></figure></p>
+<h3 id="export-default-命令"><a href="#export-default-命令" class="headerlink" title="export default 命令"></a>export default 命令</h3><p>从前面的例子可以看出，使用<code>import</code>命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。但是，用户肯定希望快速上手，未必愿意阅读文档，去了解模块有哪些属性和方法。</p>
+<p>为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到<code>export default</code>命令，为模块指定默认输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// export-default.js</div><div class="line">export default function () &#123;</div><div class="line">  console.log(&apos;foo&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码是一个模块文件<code>export-default.js</code>，它的默认输出是一个函数。</p>
+<p>其他模块加载该模块时，<code>import</code>命令可以为该匿名函数指定任意名字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// import-default.js</div><div class="line">import customName from &apos;./export-default&apos;;</div><div class="line">customName(); // &apos;foo&apos;</div></pre></td></tr></table></figure></p>
+<p>上面代码的<code>import</code>命令，可以用任意名称指向<code>export-default.js</code>输出的方法，这时就不需要知道原模块输出的函数名。需要注意的是，这时<code>import</code>命令后面，不使用大括号。</p>
+<h3 id="export-与-import-的复合写法"><a href="#export-与-import-的复合写法" class="headerlink" title="export 与 import 的复合写法"></a>export 与 import 的复合写法</h3><p>如果在一个模块之中，先输入后输出同一个模块，<code>import</code>语句可以与<code>export</code>语句写在一起。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">export &#123; foo, bar &#125; from &apos;my_module&apos;;</div><div class="line"></div><div class="line">// 等同于</div><div class="line">import &#123; foo, bar &#125; from &apos;my_module&apos;;</div><div class="line">export &#123; foo, bar &#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="模块的继承"><a href="#模块的继承" class="headerlink" title="模块的继承"></a>模块的继承</h3><p>模块之间也可以继承。</p>
+<p>假设有一个<code>circleplus</code>模块，继承了<code>circle</code>模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// circleplus.js</div><div class="line"></div><div class="line">export * from &apos;circle&apos;;</div><div class="line">export var e = 2.71828182846;</div><div class="line">export default function(x) &#123;</div><div class="line">  return Math.exp(x);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码中的<code>export *</code>，表示再输出<code>circle</code>模块的所有属性和方法。注意，<code>export *</code>命令会忽略<code>circle</code>模块的<code>default</code>方法。然后，上面代码又输出了自定义的<code>e</code>变量和默认方法。</p>
+<h1 id="ES6-的一些总结"><a href="#ES6-的一些总结" class="headerlink" title="ES6 的一些总结"></a>ES6 的一些总结</h1><p>ES6 中还有很多你可能都用不上（至少现在用不上）的可圈可点的特性，以下无特定顺序：</p>
+<ul>
+<li>Math / Number / String / Array / Object中新的方法</li>
+<li>二进制和八进制数据类型</li>
+<li>自动展开多余参数</li>
+<li>Symbols</li>
+<li>尾部调用优化</li>
+<li>generator</li>
+<li>更新的数据结构（如Map和Set）</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote>
+<p><a href="http://es6.ruanyifeng.com/" title="《ECMAScript 6 入门》" target="_blank" rel="external">《ECMAScript 6 入门》</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2017/03/22/ES6中常用特性/es6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;ECMAScript-6&quot;&gt;&lt;a href=&quot;#ECMAScript-6&quot; class=&quot;headerlink&quot; title=&quot;ECMAScript 6&quot;&gt;&lt;/a&gt;ECMAScript 6&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp;ES6（ECMAScript2015）的出现，给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。本文主要针对 ES6 的新特性做一些简要介绍。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://www.carsonchen.online/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://www.carsonchen.online/tags/JavaScript/"/>
+    
+  </entry>
+  
+</feed>
